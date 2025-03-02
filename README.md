@@ -1,2 +1,2 @@
-# maze-solver
-Contains the algorithms to determine, solve and maneuver a maze.
+# maze-solver - Hardwrae
+Contains the CAD models for the micromouse bot.
