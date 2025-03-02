@@ -8,9 +8,11 @@ class Mouse:
         self.y = y
         self.known_walls = known_walls    
         self.goal = goal
+        self.moves = 0
 
     def scan_walls(self):
         # simulates lidar by scanning the walls around the mouse
+        # Define the walls as a list of tuples representing blocked paths. For example, ((4, 0), (4, 1)) represents a wall between squares (4, 0) and (4, 1).
         walls = [((4, 0), (4, 1)), ((3, 1), (3, 0)), ((2, 0), (1, 0)), ((0, 1), (1, 1)), ((0, 2), (1, 2)), ((1, 3), (1, 2)), ((1, 4), (1, 3)), ((1, 2), (2, 2)), ((2, 2), (2, 1)), ((3, 2), (3, 1)), ((3, 2), (4, 2)), ((3, 3), (4, 3)), ((2, 3), (2, 2)), ((2, 3), (3, 3)), ((2, 3), (2, 4))]
         for wall in walls:
             if (self.x, self.y) == wall[0] or (self.x, self.y) == wall[1]:
@@ -55,7 +57,7 @@ class Mouse:
     
     def navigate(self, maze, goal):
         if self.x == goal[0] and self.y == goal[1]:
-            print("Goal reached!")
+            print("Goal reached in {} moves".format(self.moves))
             return
         print(maze)
         l = maze.shape[0]
@@ -75,15 +77,14 @@ class Mouse:
                         best_move = (dx, dy)
         # Move the mouse to the best position
         self.move(best_move[0], best_move[1])
+        self.moves += 1
         self.scan_walls()
         maze = self.flood_fill(goal, self.known_walls)
         return self.navigate(maze, goal)
        
 
 def main():
-    # Define the walls as a list of tuples representing blocked paths. For example, ((4, 0), (4, 1)) represents a wall between squares (4, 0) and (4, 1).
-    walls = [((4, 0), (4, 1)), ((3, 1), (3, 0)), ((2, 0), (1, 0)), ((0, 1), (1, 1)), ((0, 2), (1, 2)), ((1, 3), (1, 2)), ((1, 4), (1, 3)), ((1, 2), (2, 2)), ((2, 2), (2, 1)), ((3, 2), (3, 1)), ((3, 2), (4, 2)), ((3, 3), (4, 3)), ((2, 3), (2, 2)), ((2, 3), (3, 3)), ((2, 3), (2, 4))]
-    
+        
     # Initialize a 5x5 maze with zeros
     maze = np.zeros((5, 5))
     
