@@ -1,2 +1,2 @@
-# maze-solver
-Contains the algorithms to determine, solve and maneuver a maze.
+# maze-solver - Simulation
+Contains the framework; including code, design and algorithm; to simulate the micromouse on Matlab and ROS2-Humble. 
