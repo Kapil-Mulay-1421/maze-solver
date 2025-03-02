@@ -6,7 +6,7 @@ Contains the algorithms to determine, solve and maneuver a maze.
 
 1. **Update the Walls Array**: 
    - Open the `flood_fill.py` file.
-   - Locate the `walls` array in the `main` function. This array defines the walls in the maze as a list of tuples representing blocked paths. For example, `((4, 0), (4, 1))` represents a wall between squares `(4, 0)` and `(4, 1)`.
+   - Locate the `walls` array in the `scan_walls` function. This array defines the walls in the maze as a list of tuples representing blocked paths. For example, `((4, 0), (4, 1))` represents a wall between squares `(4, 0)` and `(4, 1)`.
    - Update the `walls` array to create your own maze. Each wall should be defined as a tuple of tuples, where each inner tuple represents a coordinate in the maze.
 
 2. **Run the Script**:
