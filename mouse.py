@@ -1,4 +1,5 @@
 import numpy as np
+from lidar import scan
 
 # Define a class mouse that will be used to represent the mouse in the maze
 class Mouse:
@@ -11,12 +12,12 @@ class Mouse:
         self.moves = 0
 
     def scan_walls(self):
-        # simulates lidar by scanning the walls around the mouse
+        # use lidar for scanning the walls around the mouse
         # Define the walls as a list of tuples representing blocked paths. For example, ((4, 0), (4, 1)) represents a wall between squares (4, 0) and (4, 1).
-        walls = [((4, 0), (4, 1)), ((3, 1), (3, 0)), ((2, 0), (1, 0)), ((0, 1), (1, 1)), ((0, 2), (1, 2)), ((1, 3), (1, 2)), ((1, 4), (1, 3)), ((1, 2), (2, 2)), ((2, 2), (2, 1)), ((3, 2), (3, 1)), ((3, 2), (4, 2)), ((3, 3), (4, 3)), ((2, 3), (2, 2)), ((2, 3), (3, 3)), ((2, 3), (2, 4))]
-        for wall in walls:
-            if (self.x, self.y) == wall[0] or (self.x, self.y) == wall[1]:
-                print("Found wall: ", wall)
+        found_walls = scan(self.x, self.y)
+        for wall in found_walls:
+            if wall not in self.known_walls:
+                print("Found a new wall between {} and {}".format(wall[0], wall[1]))
                 self.known_walls.append(wall)
 
     def move(self, dx, dy):
@@ -82,20 +83,3 @@ class Mouse:
         print("Goal reached in {} moves".format(self.moves))
         return
        
-
-def main():
-        
-    # Initialize a 5x5 maze with zeros
-    maze = np.zeros((5, 5))
-    
-    # Set the goal position
-    goal = (2, 2)
-    maze[goal] = 0
-    
-    mouse = Mouse(2, 1, [], goal) # Initialize the mouse at position (2, 1), pass empty known_walls list
-    mouse.scan_walls()
-    maze = mouse.flood_fill()
-    mouse.navigate(maze)
-
-# Run the main function
-main()
