@@ -1,3 +1,5 @@
+import numpy as np
+
 def flood_fill(self, goal, walls):
         maze = np.zeros((5, 5))
         l = maze.shape[0]
