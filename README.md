@@ -1,34 +1,25 @@
 # maze-solver
 
-Contains the algorithms to determine, solve and maneuver a maze.
+This project is a comprehensive robotics project that spans across algorithms, hardware, electronics, and simulation. The goal of the project is to develop a maze-solving robot that can navigate through a maze using various algorithms and sensors.
 
-## How to Use
+## Project Structure
 
-1. **Update the Walls Array**: 
-   - Open the `lidar.py` file.
-   - Locate the `get_walls` function. This function defines the walls in the maze as a list of tuples representing blocked paths. For example, `((4, 0), (4, 1))` represents a wall between squares `(4, 0)` and `(4, 1)`.
-   - Update the `walls` array within the `get_walls` function to create your own maze. Each wall should be defined as a tuple of tuples, where each inner tuple represents a coordinate in the maze.
+The project is divided into the following major parts:
 
-2. **Update the Start and Goal Points**:
-   - Open the `main.py` file.
-   - Locate the `main` function. This function sets the start and goal points for the mouse.
-   - Update the `mouse` initialization to set the start point and the `goal` variable to set the goal point.
+1. **Algorithms**: This folder includes the implementation of various maze-solving algorithms such as flood fill, depth-first search, and breadth-first search. The algorithms are responsible for determining the optimal path for the robot to navigate through the maze.
 
-3. **Run the Script**:
-   - Open a terminal or command prompt.
-   - Navigate to the directory containing the `main.py` file.
-   - Run the script using the following command:
+2. **Hardware**: This component involves the design and assembly of the physical robot. It includes the selection of motors, sensors, microcontrollers, and other electronic components required to build the robot.
 
-     ```bash
-     python main.py
-     ```
+3. **Electronics**: This component focuses on the electronic circuitry required to interface the sensors and actuators with the microcontroller. It includes the design of power supply circuits, motor drivers, and sensor interfaces.
 
-4. **Observe the Output**:
-   - The script will print the mouse's movements and the walls it encounters.
-   - The mouse will navigate the maze and print the number of moves it took to reach the goal.
+4. **Simulation**: This component involves the development of a simulation environment to test the maze-solving algorithms before deploying them on the physical robot. The simulation environment mimics the real-world maze and allows for testing and debugging of the algorithms.
 
-## Example
+Please head over to the respective folders to learn more about the same.
 
-In this example, the mouse starts at position `(4, 0)` and navigates to the goal at position `(2, 2)` while avoiding the walls defined in the `walls` array.
+## Contributing
 
-Feel free to modify the `walls` array in the [lidar.py] file and the start/goal points in the [main.py] file to create your own custom mazes and test the mouse's navigation capabilities.
+Contributions to this project are welcome. If you have any suggestions or improvements, please create a pull request or open an issue.
+
+## Acknowledgements
+
+We would like to thank all the contributors and supporters of this project. Your contributions and feedback are greatly appreciated.

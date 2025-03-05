@@ -1,5 +1,5 @@
 import numpy as np
-from lidar import scan
+from lidar import scan, get_walls
 
 # Define a class mouse that will be used to represent the mouse in the maze
 class Mouse:
@@ -55,12 +55,59 @@ class Mouse:
         
         # Return the updated maze
         return maze
-    
+
+    def visualize_maze(self, maze):
+        walls = get_walls()
+        # Create a copy of the maze to visualize
+        visual_maze = maze.copy()
+        # Mark the mouse's current position
+        visual_maze[self.x, self.y] = -1
+        
+        # Create a set of walls for easy lookup
+        wall_set = set(walls)
+        
+        # Print the top border
+        print("----" * visual_maze.shape[1])
+        
+        # Print the maze with walls
+        for i in range(visual_maze.shape[0]):
+            row = "|"
+            for j in range(visual_maze.shape[1]):
+                if visual_maze[i, j] == -1:
+                    row += " M "
+                elif visual_maze[i, j] == 0:
+                    row += " G "
+                else:
+                    row += "{:2d} ".format(int(visual_maze[i, j])) 
+                    # use row += "   " to view without flood_fill numbers, 
+                    # and row += "{:2d} ".format(int(visual_maze[i, j])) to view with flood_fill numbers
+                
+                # Check for vertical walls
+                if ((i, j), (i, j + 1)) in wall_set or ((i, j + 1), (i, j)) in wall_set or j == visual_maze.shape[1] - 1:
+                    row += "|"
+                else:
+                    row += " "
+            print(row)
+            
+            # Check for horizontal walls
+            if i < visual_maze.shape[0] - 1:
+                row = " "
+                for j in range(visual_maze.shape[1]):
+                    if ((i, j), (i + 1, j)) in wall_set or ((i + 1, j), (i, j)) in wall_set:
+                        row += "--- "
+                    else:
+                        row += "    "
+                print(row)
+        
+        # Print the bottom border
+        print("----" * visual_maze.shape[1])
+
+
     def navigate(self, maze):
         l = maze.shape[0]
         b = maze.shape[1]
         while self.x != self.goal[0] or self.y != self.goal[1]:
-            print(maze)
+            self.visualize_maze(maze)
             best_value = -1
             best_move = (0, 0)
             # Moves to the adjacent square with the least value
@@ -80,6 +127,6 @@ class Mouse:
             self.scan_walls()
             maze = self.flood_fill()
 
+        self.visualize_maze(maze)
         print("Goal reached in {} moves".format(self.moves))
         return
-       
