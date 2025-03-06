@@ -4,12 +4,13 @@ from lidar import scan, get_walls
 # Define a class mouse that will be used to represent the mouse in the maze
 class Mouse:
 
-    def __init__(self, x, y, known_walls, goal):
+    def __init__(self, x, y, known_walls, goal, known_paths):
         self.x = x
         self.y = y
         self.known_walls = known_walls    
         self.goal = goal
         self.moves = 0
+        self.known_paths = known_paths
 
     def scan_walls(self):
         # use lidar for scanning the walls around the mouse
@@ -106,6 +107,8 @@ class Mouse:
     def navigate(self, maze):
         l = maze.shape[0]
         b = maze.shape[1]
+        moves = []
+        positions = [(self.x, self.y)]
         while self.x != self.goal[0] or self.y != self.goal[1]:
             self.visualize_maze(maze)
             best_value = -1
@@ -123,10 +126,26 @@ class Mouse:
                             best_move = (dx, dy)
             # Move the mouse to the best position
             self.move(best_move[0], best_move[1])
+            moves += [best_move]
+
             self.moves += 1
+            positions += [(self.x, self.y)]
             self.scan_walls()
             maze = self.flood_fill()
 
         self.visualize_maze(maze)
+        self.optimize_and_memorize(moves, positions)
         print("Goal reached in {} moves".format(self.moves))
+        print("Path: {}".format(self.known_paths[-1]))
+        return
+    
+    def optimize_and_memorize(self, moves, positions):
+        # removes the moves between instances when the same position is reached
+        for i in range(len(moves)):
+            for j in range(len(moves), i, -1):
+                if positions[i] == positions[j]:
+                    del moves[i:j]
+                    del positions[i:j]
+                    break
+        self.known_paths += [moves]
         return
