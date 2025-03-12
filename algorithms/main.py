@@ -11,10 +11,14 @@ def main():
     maze[goal] = 0
     
     # Create a mouse instance and navigate the maze
-    mouse = Mouse(4, 0, [], goal, [])
+    mouse = Mouse(0, 0, [], goal, [])
     mouse.scan_walls()
     maze = mouse.flood_fill()
     mouse.navigate(maze)
+    print(mouse.x, mouse.y)
+    mouse.goal = (0, 0)
+    maze = mouse.flood_fill()
+    mouse.navigate(maze, reverse=True)
 
 # Run the main function
 if __name__ == "__main__":

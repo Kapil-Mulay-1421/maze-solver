@@ -104,7 +104,8 @@ class Mouse:
         print("----" * visual_maze.shape[1])
 
 
-    def navigate(self, maze):
+    def navigate(self, maze, reverse=False):
+        self.moves = 0
         l = maze.shape[0]
         b = maze.shape[1]
         moves = []
@@ -134,6 +135,9 @@ class Mouse:
             maze = self.flood_fill()
 
         self.visualize_maze(maze)
+        if reverse:
+            print("moves in reverse: ", moves)
+            moves = self.reverse(moves)
         self.optimize_and_memorize(moves, positions)
         print("Goal reached in {} moves".format(self.moves))
         print("Path: {}".format(self.known_paths[-1]))
@@ -149,3 +153,9 @@ class Mouse:
                     break
         self.known_paths += [moves]
         return
+    
+    def reverse(self, path):
+        # given the path taken from goal to starting point, determines the path from starting point to goal
+        for i in range(len(path)):
+            path[i] = (-path[i][0], -path[i][1])
+        return path
