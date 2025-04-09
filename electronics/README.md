@@ -24,7 +24,7 @@ To install these:
 4. Jumper Wires
 5. USB Cable for Serial Communication
 
-###🔌Pin Diagram
+### 🔌Pin Diagram
 1. Connect VCC (MPU6050) to 5V pin (Arduino UNO).
 2. Make sure sensor and microcontroller have a common GND.
 3. Connect SDA (MPU6050) to A4.
@@ -39,6 +39,9 @@ To install these:
 | ESP32         | GPIO 21       | GPIO 22       | Default I2C pins (can be reconfigured) |
 
 📝 **Note**: On boards like ESP32 and Teensy, you can use other pins for I2C with `Wire.begin(SDA, SCL);` in your code.
+
+
+<img width="517" alt="MPU6050-Circuit Diagram" src="https://github.com/user-attachments/assets/1ae46421-b835-48a0-9577-b38b4384f71c" />
 
 ### Getting Started
 1. Clone Repository
