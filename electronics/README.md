@@ -24,7 +24,7 @@ To install these:
 4. Jumper Wires
 5. USB Cable for Serial Communication
 
-### Pin Diagram
+###🔌Pin Diagram
 1. Connect VCC (MPU6050) to 5V pin (Arduino UNO).
 2. Make sure sensor and microcontroller have a common GND.
 3. Connect SDA (MPU6050) to A4.
