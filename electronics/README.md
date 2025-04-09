@@ -43,8 +43,11 @@ To install these:
 ### Getting Started
 1. Clone Repository
 2. Make the desired connections
-3. Copy the code in Arduino IDE.
+3. Copy the code (MPU6050.ino) in Arduino IDE.
 4. Select the desired Port and Board.
 5. Upload the code.
 
 **Note:** Make sure the Sensor is kept on flat surface with Z-Axis of the sensor pointing downwards.
+
+### Algorithm Used for Callibration
+A global variable **num_samples** is defined which sets the number of data samples MPU6050 takes for the accelorometer and gyroscope in all the three directions. These valued are then sumed over for num_samples iterations in their respective variables. The **offset variables** for acceleration and rotation in all 6 directions are then set by taking an average of the data collected in num_samples iterations. In the main loop, these offset values are subtracted from the real time readings recorded by the sensor. 
