@@ -1,6 +1,8 @@
 # maze-solver - Electronics
 Team aims to build a robust electrical system to act as a solid bridge between software and hardware.
 
+## maze-solver - Circuit Components
+
 ## MPU6050 Callibration and Data Logging
 This project uses MPU6050 accelerometer and gyroscope over the standard odometry data from motor encoders for precise control and localisation of the bot. **Adafruit MPU6050** library, which an I2C hardware driver specially for MPU6050, for getting accelerometer and gyroscope data.
 
