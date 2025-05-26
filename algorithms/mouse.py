@@ -10,7 +10,7 @@ from scipy.interpolate import make_splprep
 # Define a class mouse that will be used to represent the mouse in the maze
 class Mouse:
 
-    def __init__(self, x, y, known_walls, goal, known_paths, known_moves):
+    def __init__(self, x, y, known_walls, goal, known_paths, known_moves, mode='left_first'):
         self.x = x
         self.y = y
         self.direction = (1, 0) # (1, 0): +x, (0, 1): +y, (-1, 0): -x, (0, -1): -y
@@ -19,15 +19,38 @@ class Mouse:
         self.moves = 0
         self.known_moves = known_moves
         self.known_paths = known_paths
+        self.mode = mode  # 'left_first' or 'right_first'
 
     def scan_walls(self):
         # use lidar for scanning the walls around the mouse
         # Define the walls as a list of tuples representing blocked paths. For example, ((4, 0), (4, 1)) represents a wall between squares (4, 0) and (4, 1).
         found_walls = scan(self.x, self.y, self.direction)
         for wall in found_walls:
-            if wall not in self.known_walls:
+            if wall not in self.known_walls or ((wall[1], wall[0]) not in self.known_walls):
                 print("Found a new wall between {} and {}".format(wall[0], wall[1]))
                 self.known_walls.append(wall)
+    
+    def get_left(self):
+        # Get the left direction based on the current direction
+        if self.direction == (1, 0):
+            return (0, 1)
+        elif self.direction == (0, 1):
+            return (-1, 0)
+        elif self.direction == (-1, 0):
+            return (0, -1)
+        elif self.direction == (0, -1):
+            return (1, 0)
+        
+    def get_right(self):
+        # Get the right direction based on the current direction
+        if self.direction == (1, 0):
+            return (0, -1)
+        elif self.direction == (0, 1):
+            return (1, 0)
+        elif self.direction == (-1, 0):
+            return (0, 1)
+        elif self.direction == (0, -1):
+            return (-1, 0)
 
     def move_forward(self):
         # Move the mouse
@@ -152,7 +175,7 @@ class Mouse:
             plt.gca().invert_yaxis()
             plt.grid()
             plt.draw()
-            plt.pause(0.01)  # Pause to allow the plot to update
+            plt.pause(0.1)  # Pause to allow the plot to update
         plt.show()        
 
 
@@ -171,7 +194,13 @@ class Mouse:
             best_value = -1
             best_move = (0, 0)
             # Moves to the adjacent square with the least value
-            for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            if self.mode == 'left_first':
+                # Check left, forward, right, backward in that order
+                directions = [self.direction, self.get_left(), self.get_right(), (-self.direction[0], -self.direction[1])]
+            else:
+                # Check right, forward, left, backward in that order
+                directions = [self.direction, self.get_right(), self.get_left(), (-self.direction[0], -self.direction[1])]
+            for dx, dy in directions:
                     # Skip if the move is blocked by a wall
                     if ((self.x, self.y), (self.x + dx, self.y + dy)) in self.known_walls or ((self.x + dx, self.y + dy), (self.x, self.y)) in self.known_walls:
                         continue
@@ -185,32 +214,26 @@ class Mouse:
             if self.direction == (best_move[0], best_move[1]):
                 # If the best move is in the same direction, move forward
                 self.move_forward()
+                self.moves += 1
+                moves += [best_move]
+                positions += [(self.x, self.y)]
+                known_walls_at_each_step.append(self.known_walls.copy())
             else:
                 # If the best move is in a different direction, change direction
                 self.direction = (best_move[0], best_move[1])
                 print("Changed direction to ({}, {})".format(self.direction[0], self.direction[1]))
-                # Scan the walls in the new direction
-                self.scan_walls()
-                self.move_forward()
 
-            moves += [best_move]
-
-            self.moves += 1
-            positions += [(self.x, self.y)]
             self.scan_walls()
-            known_walls_at_each_step.append(self.known_walls.copy())
-            print("known walls at step {}: {}".format(self.moves, known_walls_at_each_step[-1]))
             maze = self.flood_fill()
 
-        print("known walls in first step: ", known_walls_at_each_step[0])
         self.visualize_maze(maze)
-        print("initializing gui")
         self.visualize_maze_gui(maze, positions, known_walls_at_each_step)
         if reverse:
             print("moves in reverse: ", moves)
             moves, positions = self.reverse(moves, positions)
         self.optimize_and_memorize(moves, positions)
         print("Goal reached in {} moves".format(self.moves))
+        print("Number of moves after optimization: {}".format(len(self.known_moves[-1])))
         print("Path: {}".format(self.known_paths[-1]))
         return
     

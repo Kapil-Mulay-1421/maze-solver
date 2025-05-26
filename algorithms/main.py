@@ -15,7 +15,7 @@ def main():
     maze[goal] = 0
     
     # Create a mouse instance and navigate the maze
-    mouse = Mouse(start_point[0], start_point[1], [], goal, [], [])
+    mouse = Mouse(start_point[0], start_point[1], [], goal, [], [], mode='right_first')
     mouse.scan_walls()
     maze = mouse.flood_fill()
     mouse.navigate(maze)

@@ -185,7 +185,9 @@ def scan(x, y, direction):
     found_walls = []
     dx, dy = direction
     # if there is a wall directly in front of the mouse, return it
-    if ((x, y), (x + dx, y + dy)) in walls or ((x, y), (x + dx, y + dy)) in walls:
+    print((x, y), (x + dx, y + dy))
+    print(x, y, dx, dy)
+    if ((x, y), (x + dx, y + dy)) in walls or ((x + dx, y + dy), (x, y)) in walls:
         found_walls.append(((x, y), (x + dx, y + dy)))
         print('returning wall in front of mouse', (x + dx, y + dy))
         return found_walls
