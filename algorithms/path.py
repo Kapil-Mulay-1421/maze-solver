@@ -1,3 +1,5 @@
+from regression import regress
+
 class Path:
     def __init__(self, positions, moves):
         self.positions = positions
@@ -15,7 +17,8 @@ class Path:
     
     def calculate_feasibility_score(self):
         # Lesser turns and shorter paths are more feasible
-        complexity = self.length + self.turns
-        if complexity == 0:
+        weight_length, weight_turns, intercept = regress()
+        time = weight_length * self.length + weight_turns * self.turns + intercept
+        if time == 0:
             return float('inf')
-        return 1/complexity
+        return 1 / (time)
