@@ -1,5 +1,6 @@
 import numpy as np
 from lidar import scan, get_walls
+from path import Path
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.path as mpath
@@ -17,7 +18,6 @@ class Mouse:
         self.known_walls = known_walls
         self.goal = goal
         self.moves = 0
-        self.known_moves = known_moves
         self.known_paths = known_paths
         self.mode = mode  # 'left_first' or 'right_first'
 
@@ -175,7 +175,7 @@ class Mouse:
             plt.gca().invert_yaxis()
             plt.grid()
             plt.draw()
-            plt.pause(0.1)  # Pause to allow the plot to update
+            plt.pause(0.01)  # Pause to allow the plot to update
         plt.show()        
 
 
@@ -229,12 +229,12 @@ class Mouse:
         self.visualize_maze(maze)
         self.visualize_maze_gui(maze, positions, known_walls_at_each_step)
         if reverse:
-            print("moves in reverse: ", moves)
+            # print("moves in reverse: ", moves)
             moves, positions = self.reverse(moves, positions)
         self.optimize_and_memorize(moves, positions)
         print("Goal reached in {} moves".format(self.moves))
-        print("Number of moves after optimization: {}".format(len(self.known_moves[-1])))
-        print("Path: {}".format(self.known_paths[-1]))
+        print("Number of moves after optimization: {}".format(len(self.known_paths[-1].moves)))
+        print("Path: {}".format(self.known_paths[-1].positions))
         return
     
     def optimize_and_memorize(self, moves, positions):
@@ -245,8 +245,8 @@ class Mouse:
                     del moves[i:j]
                     del positions[i:j]
                     break
-        self.known_moves += [moves]
-        self.known_paths += [positions]
+        print(len(moves), len(positions))
+        self.known_paths.append(Path(positions, moves))
         return
     
     def reverse(self, moves, positions):
@@ -285,10 +285,15 @@ class Mouse:
             plot_path.append((position[0]+offset[0], position[1]+offset[1]))
         return plot_path
     
-    def minimum_time_trajectory_optimize(self):
-        plot_paths = []
-        for i, path in enumerate(self.known_paths): 
-            plot_path = self.get_positions_for_plotting(self.known_moves[i], path)    
-            plot_paths.append(plot_path)
-        return plot_paths
+    def get_best_path(self):
+        # Return the path with the highest feasibility score
+        best_path = None
+        for path in self.known_paths:
+            if best_path is None or path.feasibility_score > best_path.feasibility_score:
+                best_path = path
+        return best_path
+    
+    
+
+
     
