@@ -37,6 +37,26 @@ def main():
     mouse.goal = (start_point[0], start_point[1])
     maze = mouse.flood_fill()
     mouse.navigate(maze, reverse=True)
+
+
+
+
+    print("All paths found:")
+    for path in mouse.known_paths:
+        print("Path: {}, \nLength: {}, \nTurns: {}, \nFeasibility Score: {}".format(
+            path.positions, 
+            path.optimized_length, 
+            path.optimized_turns, 
+            path.feasibility_score
+        ))
+
+    best_path = mouse.get_best_path()
+    print("The best path is: {}, \nLength: {}, \nTurns: {}, \nFeasibility Score: {}".format(
+        best_path.positions, 
+        best_path.optimized_length, 
+        best_path.optimized_turns, 
+        best_path.feasibility_score
+    ))
     # plot_paths = mouse.minimum_time_trajectory_optimize()
     # print('paths', plot_paths)
     # for path in plot_paths:
