@@ -231,13 +231,14 @@ class Mouse:
         if reverse:
             # print("moves in reverse: ", moves)
             moves, positions = self.reverse(moves, positions)
-        self.optimize_and_memorize(moves, positions)
+        self.remove_loops_and_memorize(moves, positions)
         print("Goal reached in {} moves".format(self.moves))
-        print("Number of moves after optimization: {}".format(len(self.known_paths[-1].moves)))
+        print("Number of moves after loop removal and optimization: {}".format(self.known_paths[-1].optimized_length))
+        print("Number of turns after loop removal and optimization: {}".format(self.known_paths[-1].optimized_turns))
         print("Path: {}".format(self.known_paths[-1].positions))
         return
     
-    def optimize_and_memorize(self, moves, positions):
+    def remove_loops_and_memorize(self, moves, positions):
         # removes the moves between instances when the same position is reached
         for i in range(len(moves)):
             for j in range(len(moves), i, -1):
