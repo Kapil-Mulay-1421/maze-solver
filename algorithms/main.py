@@ -1,7 +1,6 @@
 # Import the Mouse class from mouse.py
 from mouse import Mouse
 import numpy as np
-from visualizer import show_optimized_trajectory
 
 def main():
     # Initialize a 5x5 maze with zeros
