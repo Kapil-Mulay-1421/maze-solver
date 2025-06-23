@@ -51,6 +51,26 @@ class Mouse:
             return (0, 1)
         elif self.direction == (0, -1):
             return (-1, 0)
+        
+    def change_direction(self, new_direction):
+        if new_direction == self.get_left():
+            self.turn_left()
+        elif new_direction == self.get_right():
+            self.turn_right()
+        elif new_direction[0] == -self.direction[0] and new_direction[1] == -self.direction[1]:
+            self.turn_around()
+        else:
+            print("Invalid direction change requested: {}".format(new_direction))
+    
+    def turn_left(self):
+        self.direction = self.get_left()
+
+    def turn_right(self):
+        self.direction = self.get_right()
+
+    def turn_around(self):
+        self.turn_left()
+        self.turn_left()
 
     def move_forward(self):
         # Move the mouse
@@ -220,7 +240,7 @@ class Mouse:
                 known_walls_at_each_step.append(self.known_walls.copy())
             else:
                 # If the best move is in a different direction, change direction
-                self.direction = (best_move[0], best_move[1])
+                self.change_direction((best_move[0], best_move[1]))
                 print("Changed direction to ({}, {})".format(self.direction[0], self.direction[1]))
 
             self.scan_walls()
