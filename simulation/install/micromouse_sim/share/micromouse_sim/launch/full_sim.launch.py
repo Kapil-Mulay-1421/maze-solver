@@ -44,22 +44,22 @@ def generate_launch_description():
         arguments=[
             '-topic', 'robot_description',
             '-entity', 'micromouse',
-            '-x', '0', '-y', '0', '-z', '0.08'
+            '-x', '-1.5', '-y', '-2.35', '-z', '0.08'
         ],
         output='screen'
     )
 
     # Launch your control node
-    controller = Node(
-        package='micromouse_sim',
-        executable='ros_simulator',
-        name='ros_simulator',
-        output='screen'
-    )
+    # controller = Node(
+    #     package='micromouse_sim',
+    #     executable='ros_simulator',
+    #     name='ros_simulator',
+    #     output='screen'
+    # )
 
     return LaunchDescription([
         gazebo_launch,
         robot_state_publisher_node,
         spawn_robot,
-        controller
+        # controller
     ])

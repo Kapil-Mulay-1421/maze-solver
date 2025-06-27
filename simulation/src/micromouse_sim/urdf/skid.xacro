@@ -84,6 +84,14 @@
 
     <gazebo reference="front_left_wheel">
         <material>Gazebo/Blue</material>
+        <surface>
+        <friction>
+          <ode>
+            <mu>10.0</mu>
+            <mu2>10.0</mu2>
+          </ode>
+        </friction>
+</surface>
     </gazebo>
 
     <!--FORWARD_RIGHT LINK-->
@@ -113,6 +121,12 @@
     </link>
     <gazebo reference="front_rear_wheel">
         <material>Gazebo/Blue</material>
+        <friction>
+          <ode>
+            <mu>10.0</mu>
+            <mu2>10.0</mu2>
+          </ode>
+        </friction>
     </gazebo>
 
     <!--BACK_LEFT LINK-->
@@ -141,7 +155,12 @@
         </xacro:inertial_cylinder>
     </link>
     <gazebo reference="back_left_wheel">
-        <material>Gazebo/Blue</material>
+        <friction>
+          <ode>
+            <mu>10.0</mu>
+            <mu2>10.0</mu2>
+          </ode>
+        </friction>
     </gazebo>
 
     <!--BACK_RIGHT LINK-->
@@ -170,64 +189,172 @@
         </xacro:inertial_cylinder>
     </link>
 
-    <!-- ToF Sensor Link -->
-    <link name="tof_sensor_link">
-    <visual>
-        <origin xyz="0 0 0.03" rpy="0 0 0"/>
-        <geometry>
-        <cylinder radius="0.005" length="0.01"/>
-        </geometry>
-        <material name="black"/>
-    </visual>
-    <collision>
-        <origin xyz="0 0 0.03" rpy="0 0 0"/>
-        <geometry>
-        <cylinder radius="0.005" length="0.01"/>
-        </geometry>
-    </collision>
-    <inertial>
-        <mass value="0.01"/>
-        <origin xyz="0 0 0.03" rpy="0 0 0"/>
-        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
-    </inertial>
-    </link>
-
-    <joint name="tof_sensor_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="tof_sensor_link"/>
-    <origin xyz="0.055 0 0.03" rpy="0 0 0"/>
-    </joint>
-
-    <!-- Ray Sensor Plugin (ToF equivalent) -->
-    <gazebo reference="tof_sensor_link">
-    <sensor name="tof_sensor" type="ray">
-        <pose>0 0 0 0 0 0</pose>
-        <visualize>true</visualize>
-        <update_rate>10</update_rate>
-        <ray>
-        <scan>
-            <horizontal>
-            <samples>1</samples>
-            <resolution>1</resolution>
-            <min_angle>0</min_angle>
-            <max_angle>0</max_angle>
-            </horizontal>
-        </scan>
-        <range>
-            <min>0.01</min>
-            <max>2.0</max>
-            <resolution>0.01</resolution>
-        </range>
-        </ray>
-        <plugin name="gazebo_ros_ray_sensor" filename="libgazebo_ros_ray_sensor.so">
-        <ros>
-          <republish_topic>/tof_front</republish_topic>
-          <frame_name>tof_sensor_link</frame_name>
-          <output_type>sensor_msgs/msg/LaserScan</output_type>
-        </ros>
-        </plugin>
-    </sensor>
+    <gazebo reference="back_left_wheel">
+        <friction>
+          <ode>
+            <mu>10.0</mu>
+            <mu2>10.0</mu2>
+          </ode>
+        </friction>
     </gazebo>
+
+   <!-- ToF Sensor - Forward -->
+<link name="tof_sensor_front_link">
+  <visual>
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <geometry><cylinder radius="0.005" length="0.01"/></geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <geometry><cylinder radius="0.005" length="0.01"/></geometry>
+  </collision>
+  <inertial>
+    <mass value="0.01"/>
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+  </inertial>
+</link>
+
+<joint name="tof_sensor_front_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="tof_sensor_front_link"/>
+  <origin xyz="0.055 0 0.03" rpy="0 0 0"/>
+</joint>
+
+<gazebo reference="tof_sensor_front_link">
+  <sensor name="tof_front" type="ray">
+    <pose>0.03 0 0 0 0 0</pose>
+    <visualize>true</visualize>
+    <update_rate>10</update_rate>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>1</samples>
+          <resolution>1</resolution>
+          <min_angle>0</min_angle>
+          <max_angle>0</max_angle>
+        </horizontal>
+      </scan>
+      <range>
+        <min>0.01</min>
+        <max>2.0</max>
+        <resolution>0.01</resolution>
+      </range>
+    </ray>
+    <plugin name="gazebo_ros_ray_sensor" filename="libgazebo_ros_ray_sensor.so">
+      <ros><argument>~/out:=tof_front</argument></ros>
+      <output_type>sensor_msgs/LaserScan</output_type>
+      <frame_name>tof_sensor_front_link</frame_name>
+    </plugin>
+  </sensor>
+</gazebo>
+
+<!-- ToF Sensor - Left 45° -->
+<link name="tof_sensor_left_link">
+  <visual>
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <geometry><cylinder radius="0.005" length="0.01"/></geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <geometry><cylinder radius="0.005" length="0.01"/></geometry>
+  </collision>
+  <inertial>
+    <mass value="0.01"/>
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+  </inertial>
+</link>
+
+<joint name="tof_sensor_left_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="tof_sensor_left_link"/>
+  <origin xyz="0.055 0 0.03" rpy="0 0 0.4636"/> <!-- 0.7854 rad ≈ 45° -->
+</joint>
+
+<gazebo reference="tof_sensor_left_link">
+  <sensor name="tof_left" type="ray">
+    <pose>0.03 0 0 0 0 0</pose>
+    <visualize>true</visualize>
+    <update_rate>10</update_rate>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>1</samples>
+          <resolution>1</resolution>
+          <min_angle>0</min_angle>
+          <max_angle>0</max_angle>
+        </horizontal>
+      </scan>
+      <range>
+        <min>0.01</min>
+        <max>2.0</max>
+        <resolution>0.01</resolution>
+      </range>
+    </ray>
+    <plugin name="gazebo_ros_ray_sensor_left" filename="libgazebo_ros_ray_sensor.so">
+      <ros><argument>~/out:=tof_left</argument></ros>
+      <output_type>sensor_msgs/LaserScan</output_type>
+      <frame_name>tof_sensor_left_link</frame_name>
+    </plugin>
+  </sensor>
+</gazebo>
+
+
+<!-- ToF Sensor - Right 45° -->
+<link name="tof_sensor_right_link">
+  <visual>
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <geometry><cylinder radius="0.005" length="0.01"/></geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <geometry><cylinder radius="0.005" length="0.01"/></geometry>
+  </collision>
+  <inertial>
+    <mass value="0.01"/>
+    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+  </inertial>
+</link>
+
+<joint name="tof_sensor_right_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="tof_sensor_right_link"/>
+  <origin xyz="0.055 0 0.03" rpy="0 0 -0.4636"/> <!-- -0.7854 rad ≈ -45° -->
+</joint>
+
+<gazebo reference="tof_sensor_right_link">
+  <sensor name="tof_right" type="ray">
+    <pose>0.03 0 0 0 0 0</pose>
+    <visualize>true</visualize>
+    <update_rate>10</update_rate>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>1</samples>
+          <resolution>1</resolution>
+          <min_angle>0</min_angle>
+          <max_angle>0</max_angle>
+        </horizontal>
+      </scan>
+      <range>
+        <min>0.01</min>
+        <max>2.0</max>
+        <resolution>0.01</resolution>
+      </range>
+    </ray>
+    <plugin name="gazebo_ros_ray_sensor_right" filename="libgazebo_ros_ray_sensor.so">
+      <ros><argument>~/out:=tof_right</argument></ros>
+      <output_type>sensor_msgs/LaserScan</output_type>
+      <frame_name>tof_sensor_right_link</frame_name>
+    </plugin>
+  </sensor>
+</gazebo>
+
 
 
     <gazebo>
@@ -244,6 +371,8 @@
 
         <!-- Number of wheel pairs -->
         <num_wheel_pairs>2</num_wheel_pairs>
+
+        <cmd_vel_timeout>0.1</cmd_vel_timeout>
 
         <!-- wheels0 -->
         <left_joint>front_left_wheel_joint</left_joint>

@@ -2,6 +2,8 @@ import numpy as np
 from lidar import scan
 from path import Path
 from visualizer import visualize_maze, visualize_maze_gui
+from ros_simulator_copy import RosSimulator
+import time
 
 
 # Define a class mouse that will be used to represent the mouse in the maze
@@ -16,15 +18,67 @@ class Mouse:
         self.moves = 0
         self.known_paths = known_paths
         self.mode = mode  # 'left_first' or 'right_first'
+        self.sim = RosSimulator()
+
+    def analyze_tof_distances(self, tof_front, tof_left, tof_right):
+        """
+        Returns booleans for specific ToF distance conditions.
+
+        Args:
+            tof_front (float): Front ToF sensor distance (in cm).
+            tof_left (float): Left ToF sensor distance (in cm).
+            tof_right (float): Right ToF sensor distance (in cm).
+
+        Returns:
+            Tuple[bool, bool, bool, bool]: 
+                1. Front distance between 10 and 15 cm
+                2. Front distance between 35 and 40 cm
+                3. Left distance between 24.438 and 33.425 cm
+                4. Right distance between 24.438 and 33.425 cm
+        """
+        front_close = 0.01 <= tof_front <= 0.23
+        front_far = 0.35 <= tof_front <= 0.5
+        left_in_range = 0.21438 <= tof_left <= 0.36425
+        right_in_range = 0.21438 <= tof_right <= 0.36425
+
+        return front_close, front_far, left_in_range, right_in_range
 
     def scan_walls(self):
         # use lidar for scanning the walls around the mouse
         # Define the walls as a list of tuples representing blocked paths. For example, ((4, 0), (4, 1)) represents a wall between squares (4, 0) and (4, 1).
-        found_walls = scan(self.x, self.y, self.direction)
-        for wall in found_walls:
-            if wall not in self.known_walls or ((wall[1], wall[0]) not in self.known_walls):
-                print("Found a new wall between {} and {}".format(wall[0], wall[1]))
+        # found_walls = scan(self.x, self.y, self.direction)
+        # for wall in found_walls:
+        #     if wall not in self.known_walls or ((wall[1], wall[0]) not in self.known_walls):
+        #         print("Found a new wall between {} and {}".format(wall[0], wall[1]))
+        #         self.known_walls.append(wall)
+
+        tof_front = self.sim.get_tof_front_distance()
+        tof_left = self.sim.get_tof_left_distance()
+        tof_right = self.sim.get_tof_right_distance()
+        print(tof_front, tof_left, tof_right)
+        front_close, front_far, left_in_range, right_in_range = self.analyze_tof_distances(tof_front, tof_left, tof_right)
+        print(front_close, front_far, left_in_range, right_in_range )
+        if front_close:
+            wall = ((self.x, self.y), (self.x+self.direction[0], self.y+self.direction[1]))
+            if wall not in self.known_walls:
                 self.known_walls.append(wall)
+            return
+        
+        if front_far:
+            wall = ((self.x+self.direction[0], self.y+self.direction[1]), (self.x+2*self.direction[0], self.y+2*self.direction[1]))
+            if wall not in self.known_walls:
+                self.known_walls.append(wall)
+        if left_in_range:
+            wall = ((self.x+self.direction[0], self.y+self.direction[1]), (self.x+self.direction[0]+self.get_left()[0], self.y+self.direction[1]+self.get_left()[1]))
+            if wall not in self.known_walls:
+                self.known_walls.append(wall)
+        if right_in_range:
+            wall = ((self.x+self.direction[0], self.y+self.direction[1]), (self.x+self.direction[0]+self.get_right()[0], self.y+self.direction[1]+self.get_right()[1]))
+            if wall not in self.known_walls:
+                self.known_walls.append(wall)
+
+        print("known walls: ", self.known_walls)
+
     
     def get_left(self):
         # Get the left direction based on the current direction
@@ -60,18 +114,29 @@ class Mouse:
 
     # interface functions
     def turn_left(self):
+        self.sim.turn_left()
         self.direction = self.get_left()
 
     def turn_right(self):
+        self.sim.turn_right()
         self.direction = self.get_right()
 
     def turn_around(self):
+        self.sim.turn_left()
+        self.sim.turn_left()
         self.turn_left()
         self.turn_left()
 
     def move_forward(self):
-        self.x += self.direction[0]
-        self.y += self.direction[1]
+        feedback = self.sim.move_forward()
+        position = feedback.pose.pose.position
+        rel_x = (position.x - (-1.5))/0.25
+        rel_y = (position.y - (-2.35))/0.25
+        print(rel_x, rel_y)
+        # self.x += self.direction[0]
+        # self.y += self.direction[1]
+        self.x = round(rel_x)
+        self.y = round(rel_y)
         print("Moved to position ({}, {})".format(self.x, self.y))
         return True
 

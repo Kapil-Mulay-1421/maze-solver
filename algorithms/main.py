@@ -1,6 +1,7 @@
 # Import the Mouse class from mouse.py
 from mouse import Mouse
 import numpy as np
+import rclpy
 
 def main():
     # Initialize a 5x5 maze with zeros
@@ -12,6 +13,8 @@ def main():
     # Set the goal position
     goal = (8, 8)
     maze[goal] = 0
+
+    rclpy.init()
     
     # Create a mouse instance and navigate the maze
     mouse = Mouse(start_point[0], start_point[1], [], goal, [], [], mode='right_first')

@@ -17,12 +17,26 @@ class RosSimulator(Node):
         self.cmd_vel_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.feedback = None
         self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
-        self.timer_period = 0.1  # seconds
-        self.tof_distance = None
-        self.tof_sub = self.create_subscription(
+        self.timer_period = 0.01  # seconds
+        self.tof_front_distance = None
+        self.tof_left_distance = None
+        self.tof_right_distance = None
+        self.tof_front_sub = self.create_subscription(
             LaserScan,
             '/tof_front',
-            self.tof_callback,
+            self.tof_front_callback,
+            10
+        )
+        self.tof_left_sub = self.create_subscription(
+            LaserScan,
+            '/tof_left',
+            self.tof_left_callback,
+            10
+        )
+        self.tof_right_sub = self.create_subscription(
+            LaserScan,
+            '/tof_right',
+            self.tof_right_callback,
             10
         )
 
@@ -53,14 +67,21 @@ class RosSimulator(Node):
         move_cmd.angular.z = 0.0
 
         moved = 0.0
-        while moved < distance and rclpy.ok():
-            self.cmd_vel_pub.publish(move_cmd)
+        while rclpy.ok():
             rclpy.spin_once(self)
             current = self.feedback.pose.pose.position
             moved = ((current.x - start.x) ** 2 + (current.y - start.y) ** 2) ** 0.5
+
+            if moved >= distance:
+                break
+
+            self.cmd_vel_pub.publish(move_cmd)
             time.sleep(self.timer_period)
 
         # Stop the robot
+        print(start.x)
+        print(current.x)
+        print(moved)
         self.cmd_vel_pub.publish(Twist())
         return self.feedback
 
@@ -122,14 +143,23 @@ class RosSimulator(Node):
     def get_feedback(self):
         return self.feedback
     
-    def tof_callback(self, msg):
+    def tof_front_callback(self, msg):
     # msg.ranges is a list, for 1-sample ray sensor it will have one value
         if msg.ranges:
-            self.tof_distance = msg.ranges[0]
-        print(self.tof_distance)
+            self.tof_front_distance = msg.ranges[0]
+
+    def tof_left_callback(self, msg):
+    # msg.ranges is a list, for 1-sample ray sensor it will have one value
+        if msg.ranges:
+            self.tof_left_distance = msg.ranges[0]
+
+    def tof_right_callback(self, msg):
+    # msg.ranges is a list, for 1-sample ray sensor it will have one value
+        if msg.ranges:
+            self.tof_right_distance = msg.ranges[0]
 
     def get_tof_distance(self):
-        return self.tof_distance
+        return self.tof_front_distance
 
 
 def main():
@@ -138,15 +168,12 @@ def main():
 
     try:
         # Example usage:
-        simulator.turn_right(83)
-        simulator.turn_right(83)
         simulator.move_forward()
-        simulator.move_forward(0.25)
-        simulator.turn_right(83)
+        rel_x = (simulator.feedback.pose.pose.position.x - (-1.5))/0.25
+        print(rel_x)
         simulator.move_forward()
-        simulator.move_forward()
-        simulator.move_forward()
-        simulator.move_forward()
+        rel_x = (simulator.feedback.pose.pose.position.x - (-1.5))/0.25
+        print(rel_x)
     except KeyboardInterrupt:
         pass
     finally:
