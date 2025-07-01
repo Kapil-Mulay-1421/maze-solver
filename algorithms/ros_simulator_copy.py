@@ -17,7 +17,7 @@ class RosSimulator(Node):
         self.cmd_vel_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.feedback = None
         self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
-        self.timer_period = 0.01  # seconds
+        self.timer_period = 0.005  # seconds
         self.tof_front_distance = 0
         self.tof_left_distance = 0
         self.tof_right_distance = 0
@@ -50,7 +50,8 @@ class RosSimulator(Node):
         while self.feedback is None and rclpy.ok():
             rclpy.spin_once(self)
 
-    def move_forward(self, distance=0.25, speed=0.1):
+    def move_forward(self, distance=0.25, speed=0.25):
+        print("Moving forward: distance = {}, speed = {}".format(distance, speed))
         """
         Publishes a forward movement command and waits for feedback.
         Args:
@@ -79,6 +80,7 @@ class RosSimulator(Node):
             time.sleep(self.timer_period)
 
         # Stop the robot
+        print("Moved forward: started at {} moved = {} and new position = {}".format(start.x, moved, current.x))
         self.cmd_vel_pub.publish(Twist())
         return self.feedback
 
@@ -101,7 +103,7 @@ class RosSimulator(Node):
         """Compute the minimal angular difference (with direction)."""
         return self.normalize_angle(to_angle - from_angle)
 
-    def turn(self, angle_deg=90, angular_speed=0.5):
+    def turn(self, angle_deg=90, angular_speed=0.25):
         """
         Turns the robot in-place using odometry-based yaw.
         Args:
@@ -110,6 +112,9 @@ class RosSimulator(Node):
         """
         target_angle = math.radians(angle_deg)
         move_cmd = Twist()
+        move_cmd.linear.x = 0.0
+        move_cmd.linear.y = 0.0
+        move_cmd.linear.z = 0.0
         move_cmd.angular.z = math.copysign(angular_speed, target_angle)
 
         # Wait until odometry data is available
@@ -120,21 +125,25 @@ class RosSimulator(Node):
         start_yaw = self.quaternion_to_yaw(start_q)
         turned = 0.0
 
-        while abs(turned) < abs(target_angle) and rclpy.ok():
-            self.cmd_vel_pub.publish(move_cmd)
+        while rclpy.ok():
             rclpy.spin_once(self, timeout_sec=0.05)
-            time.sleep(self.timer_period)
             current_q = self.feedback.pose.pose.orientation
             current_yaw = self.quaternion_to_yaw(current_q)
             turned = self.shortest_angular_distance(start_yaw, current_yaw)
 
+            if abs(turned) >= abs(target_angle):
+                break
+
+            self.cmd_vel_pub.publish(move_cmd)
+            time.sleep(self.timer_period)
+
         self.cmd_vel_pub.publish(Twist())  # stop
         return self.feedback
 
-    def turn_left(self, angle=90, angular_speed=0.5):
+    def turn_left(self, angle=90, angular_speed=0.25):
         return self.turn(angle_deg=angle, angular_speed=angular_speed)
 
-    def turn_right(self, angle=90, angular_speed=0.5):
+    def turn_right(self, angle=90, angular_speed=0.25):
         return self.turn(angle_deg=-angle, angular_speed=angular_speed)
 
     def get_feedback(self):
@@ -144,7 +153,6 @@ class RosSimulator(Node):
     # msg.ranges is a list, for 1-sample ray sensor it will have one value
         if msg.ranges:
             self.tof_front_distance = msg.ranges[0]
-            print("set tof front dist to ", self.tof_front_distance)
 
     def tof_left_callback(self, msg):
     # msg.ranges is a list, for 1-sample ray sensor it will have one value

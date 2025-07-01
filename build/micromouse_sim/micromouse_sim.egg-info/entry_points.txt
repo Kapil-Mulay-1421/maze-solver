@@ -1,0 +1,3 @@
+[console_scripts]
+ros_simulator = micromouse_sim.ros_simulator:main
+

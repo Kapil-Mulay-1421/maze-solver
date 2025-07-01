@@ -4,7 +4,7 @@ import matplotlib.patches as patches
 
 def visualize_maze(self, maze):
         print("calling visualize maze from visualizer.py")
-        walls = get_walls()
+        walls = self.known_walls
         # Create a copy of the maze to visualize
         visual_maze = maze.copy()
         # Mark the mouse's current position

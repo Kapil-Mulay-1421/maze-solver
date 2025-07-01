@@ -386,8 +386,8 @@
         <wheel_separation>0.053</wheel_separation>
         <wheel_separation>0.53</wheel_separation>
 
-        <wheel_diameter>0.049</wheel_diameter>
-        <wheel_diameter>0.049</wheel_diameter>
+        <wheel_diameter>0.053</wheel_diameter>
+        <wheel_diameter>0.053</wheel_diameter>
 
         <!-- limits -->
         <max_wheel_torque>20</max_wheel_torque>

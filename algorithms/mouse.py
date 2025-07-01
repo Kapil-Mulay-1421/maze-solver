@@ -38,8 +38,8 @@ class Mouse:
         """
         front_close = 0.01 <= tof_front <= 0.23
         front_far = 0.35 <= tof_front <= 0.5
-        left_in_range = 0.21438 <= tof_left <= 0.36425
-        right_in_range = 0.21438 <= tof_right <= 0.36425
+        left_in_range = 0.24438 <= tof_left <= 0.33425
+        right_in_range = 0.24438 <= tof_right <= 0.33425
 
         return front_close, front_far, left_in_range, right_in_range
 
@@ -114,31 +114,84 @@ class Mouse:
 
     # interface functions
     def turn_left(self):
-        self.sim.turn_left()
-        self.direction = self.get_left()
-
-    def turn_right(self):
-        self.sim.turn_right()
-        self.direction = self.get_right()
-
-    def turn_around(self):
-        self.sim.turn_left()
-        self.sim.turn_left()
-        self.turn_left()
-        self.turn_left()
-
-    def move_forward(self):
-        feedback = self.sim.move_forward()
+        feedback = self.sim.turn_left()
         position = feedback.pose.pose.position
         rel_x = (position.x - (-1.5))/0.25
-        rel_y = (position.y - (-2.35))/0.25
+        rel_y = (position.y - (-2.32))/0.25
+        print(rel_x, rel_y)
+        self.direction = self.get_left()
+        self.correct_position(rel_x, rel_y)
+        return feedback
+
+
+    def turn_right(self):
+        feedback = self.sim.turn_right()
+        position = feedback.pose.pose.position
+        rel_x = (position.x - (-1.5))/0.25
+        rel_y = (position.y - (-2.32))/0.25
+        print(rel_x, rel_y)
+        self.direction = self.get_right()
+        self.correct_position(rel_x, rel_y)
+        return feedback
+
+    def turn_around(self):
+        print("Turning around")
+        self.turn_left()
+        feedback = self.turn_left()
+        position = feedback.pose.pose.position
+        rel_x = (position.x - (-1.5))/0.25
+        rel_y = (position.y - (-2.32))/0.25
+        print(rel_x, rel_y)
+
+    def move_forward(self, distance=0.25):
+        feedback = self.sim.move_forward(distance)
+        position = feedback.pose.pose.position
+        rel_x = (position.x - (-1.5))/0.25
+        rel_y = (position.y - (-2.32))/0.25
         print(rel_x, rel_y)
         # self.x += self.direction[0]
         # self.y += self.direction[1]
         self.x = round(rel_x)
         self.y = round(rel_y)
         print("Moved to position ({}, {})".format(self.x, self.y))
+        self.correct_position(rel_x, rel_y)
         return True
+    
+    def correct_position(self, rel_x, rel_y):
+        """
+        Corrects the mouse's position based on the current feedback.
+        This is useful if the mouse has moved but with some error.
+        """
+        print(self.direction)
+        speed = 0.1
+        if self.direction  == (1, 0) or self.direction == (-1, 0):
+            if abs(rel_x - round(rel_x)) > 0.05:
+                print("absolute difference in x: ", abs(rel_x - round(rel_x)))
+                print("Correcting position in x")
+                if round(rel_x) < rel_x and self.direction == (1, 0):
+                    speed = -speed
+                elif round(rel_x) > rel_x and self.direction == (-1, 0):
+                    speed = -speed
+                feedback = self.sim.move_forward(abs((round(rel_x) - rel_x))*0.25, speed)
+                position = feedback.pose.pose.position
+                rel_x = (position.x - (-1.5))/0.25
+                rel_y = (position.y - (-2.32))/0.25
+                print("Corrected position to ({}, {})".format(rel_x, rel_y))
+                return
+        elif self.direction == (0, 1) or self.direction == (0, -1):
+            if abs(rel_y - round(rel_y)) > 0.05:
+                print("absolute difference in y: ", abs(rel_y - round(rel_y)))
+                print("Correcting position in y")
+                if round(rel_y) < rel_y and self.direction == (0, 1):
+                    speed = -speed
+                elif round(rel_y) > rel_y and self.direction == (0, -1):
+                    speed = -speed
+                feedback = self.sim.move_forward(abs((round(rel_y) - rel_y))*0.25, speed)
+                position = feedback.pose.pose.position
+                rel_x = (position.x - (-1.5))/0.25
+                rel_y = (position.y - (-2.32))/0.25
+                print("Corrected position to ({}, {})".format(rel_x, rel_y))
+                return
 
     def flood_fill(self):
         maze = np.zeros((16, 16))

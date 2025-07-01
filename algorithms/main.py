@@ -25,18 +25,21 @@ def main():
     print(mouse.x, mouse.y)
 
     mouse.goal = (start_point[0], start_point[1])
+    mouse.scan_walls()
     maze = mouse.flood_fill()
     mouse.navigate(maze, reverse=True)
 
     print(mouse.x, mouse.y)
 
     mouse.goal = goal
+    mouse.scan_walls()
     mouse.flood_fill()
     mouse.navigate(maze)
 
     print(mouse.x, mouse.y)
 
     mouse.goal = (start_point[0], start_point[1])
+    mouse.scan_walls()
     maze = mouse.flood_fill()
     mouse.navigate(maze, reverse=True)
 

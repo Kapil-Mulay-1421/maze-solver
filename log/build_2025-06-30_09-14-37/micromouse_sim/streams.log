@@ -1,0 +1,48 @@
+[0.828s] Invoking command in '/home/mkapil/ros2_ws/maze-solver/simulation/src/micromouse_sim': PYTHONPATH=/home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/micromouse_sim build --build-base /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/build install --record /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/install.log --single-version-externally-managed install_data
+[0.991s] running egg_info
+[0.991s] creating ../../../build/micromouse_sim/micromouse_sim.egg-info
+[0.992s] writing ../../../build/micromouse_sim/micromouse_sim.egg-info/PKG-INFO
+[0.992s] writing dependency_links to ../../../build/micromouse_sim/micromouse_sim.egg-info/dependency_links.txt
+[0.992s] writing entry points to ../../../build/micromouse_sim/micromouse_sim.egg-info/entry_points.txt
+[0.992s] writing requirements to ../../../build/micromouse_sim/micromouse_sim.egg-info/requires.txt
+[0.992s] writing top-level names to ../../../build/micromouse_sim/micromouse_sim.egg-info/top_level.txt
+[0.992s] writing manifest file '../../../build/micromouse_sim/micromouse_sim.egg-info/SOURCES.txt'
+[0.993s] reading manifest file '../../../build/micromouse_sim/micromouse_sim.egg-info/SOURCES.txt'
+[0.993s] adding license file 'LICENSE'
+[0.994s] writing manifest file '../../../build/micromouse_sim/micromouse_sim.egg-info/SOURCES.txt'
+[0.994s] running build
+[0.994s] running build_py
+[0.994s] creating /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/build
+[0.994s] creating /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/build/lib
+[0.994s] creating /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/build/lib/micromouse_sim
+[0.994s] copying micromouse_sim/ros_simulator.py -> /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/build/lib/micromouse_sim
+[0.994s] copying micromouse_sim/__init__.py -> /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/build/lib/micromouse_sim
+[0.994s] running install
+[0.995s] running install_lib
+[0.995s] creating /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim
+[0.995s] copying /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/build/lib/micromouse_sim/ros_simulator.py -> /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim
+[0.995s] copying /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/build/lib/micromouse_sim/__init__.py -> /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim
+[0.996s] byte-compiling /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim/ros_simulator.py to ros_simulator.cpython-310.pyc
+[0.998s] byte-compiling /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim/__init__.py to __init__.cpython-310.pyc
+[0.998s] running install_data
+[0.998s] creating /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/ament_index
+[0.998s] creating /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/ament_index/resource_index
+[0.998s] creating /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/ament_index/resource_index/packages
+[0.998s] copying resource/micromouse_sim -> /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/ament_index/resource_index/packages
+[0.998s] copying package.xml -> /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim
+[0.998s] creating /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim/launch
+[0.998s] copying launch/full_sim.launch.py -> /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim/launch
+[0.999s] creating /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim/urdf
+[0.999s] copying urdf/inertial_macros.xacro -> /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim/urdf
+[0.999s] copying urdf/robot.urdf.xacro -> /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim/urdf
+[1.000s] copying urdf/skid.xacro -> /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim/urdf
+[1.000s] copying urdf/gazebo_control.xacro -> /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim/urdf
+[1.001s] creating /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim/meshes
+[1.001s] creating /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim/worlds
+[1.001s] copying worlds/maze.world -> /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/share/micromouse_sim/worlds
+[1.003s] running install_egg_info
+[1.004s] Copying ../../../build/micromouse_sim/micromouse_sim.egg-info to /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim-0.0.0-py3.10.egg-info
+[1.005s] running install_scripts
+[1.020s] Installing ros_simulator script to /home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/lib/micromouse_sim
+[1.020s] writing list of installed files to '/home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/install.log'
+[1.039s] Invoked command in '/home/mkapil/ros2_ws/maze-solver/simulation/src/micromouse_sim' returned '0': PYTHONPATH=/home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mkapil/ros2_ws/maze-solver/install/micromouse_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/micromouse_sim build --build-base /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/build install --record /home/mkapil/ros2_ws/maze-solver/build/micromouse_sim/install.log --single-version-externally-managed install_data
