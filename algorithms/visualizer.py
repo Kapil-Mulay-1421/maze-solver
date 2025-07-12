@@ -76,16 +76,16 @@ def visualize_maze_gui(self, maze, positions, known_walls_at_each_step):
                     rect = patches.Rectangle((j, i), 1, 1, linewidth=1, edgecolor='black', facecolor='green')
                     ax.add_patch(rect)
                 
-                if ((i, j), (i, j + 1)) in wall_set or ((i, j + 1), (i, j)) in wall_set:
-                    if ((i, j), (i, j + 1)) in known_walls_set or ((i, j + 1), (i, j)) in known_walls_set:
-                        ax.plot([j + 1, j + 1], [i+1, i], color='blue', linewidth=2)
-                    else:
-                        ax.plot([j + 1, j + 1], [i+1, i], color='red', linewidth=2)
-                if ((i, j), (i + 1, j)) in wall_set or ((i + 1, j), (i, j)) in wall_set:
-                    if ((i, j), (i + 1, j)) in known_walls_set or ((i + 1, j), (i, j)) in known_walls_set:
-                        ax.plot([j, j + 1], [i+1, i+1], color='blue', linewidth=2)
-                    else:
-                        ax.plot([j, j + 1], [i+1, i+1], color='red', linewidth=2)
+                # if ((i, j), (i, j + 1)) in wall_set or ((i, j + 1), (i, j)) in wall_set:
+                if ((i, j), (i, j + 1)) in known_walls_set or ((i, j + 1), (i, j)) in known_walls_set:
+                    ax.plot([j + 1, j + 1], [i+1, i], color='black', linewidth=2)
+                else:
+                    ax.plot([j + 1, j + 1], [i+1, i], color='white', linewidth=2)
+                # if ((i, j), (i + 1, j)) in wall_set or ((i + 1, j), (i, j)) in wall_set:
+                if ((i, j), (i + 1, j)) in known_walls_set or ((i + 1, j), (i, j)) in known_walls_set:
+                    ax.plot([j, j + 1], [i+1, i+1], color='black', linewidth=2)
+                else:
+                    ax.plot([j, j + 1], [i+1, i+1], color='white', linewidth=2)
 
         plt.gca().invert_yaxis()
         plt.grid()

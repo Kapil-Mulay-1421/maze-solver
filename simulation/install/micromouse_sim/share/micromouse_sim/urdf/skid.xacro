@@ -85,13 +85,13 @@
     <gazebo reference="front_left_wheel">
         <material>Gazebo/Blue</material>
         <surface>
-        <friction>
-          <ode>
-            <mu>10.0</mu>
-            <mu2>10.0</mu2>
-          </ode>
-        </friction>
-</surface>
+          <friction>
+            <ode>
+              <mu>10.0</mu>
+              <mu2>10.0</mu2>
+            </ode>
+          </friction>
+        </surface>
     </gazebo>
 
     <!--FORWARD_RIGHT LINK-->
@@ -121,12 +121,14 @@
     </link>
     <gazebo reference="front_rear_wheel">
         <material>Gazebo/Blue</material>
-        <friction>
-          <ode>
-            <mu>10.0</mu>
-            <mu2>10.0</mu2>
-          </ode>
-        </friction>
+        <surface>
+          <friction>
+            <ode>
+              <mu>10.0</mu>
+              <mu2>10.0</mu2>
+            </ode>
+          </friction>
+        </surface>
     </gazebo>
 
     <!--BACK_LEFT LINK-->
@@ -155,12 +157,14 @@
         </xacro:inertial_cylinder>
     </link>
     <gazebo reference="back_left_wheel">
-        <friction>
-          <ode>
-            <mu>10.0</mu>
-            <mu2>10.0</mu2>
-          </ode>
-        </friction>
+        <surface>
+          <friction>
+            <ode>
+              <mu>10.0</mu>
+              <mu2>10.0</mu2>
+            </ode>
+          </friction>
+        </surface>
     </gazebo>
 
     <!--BACK_RIGHT LINK-->
@@ -189,13 +193,15 @@
         </xacro:inertial_cylinder>
     </link>
 
-    <gazebo reference="back_left_wheel">
-        <friction>
-          <ode>
-            <mu>10.0</mu>
-            <mu2>10.0</mu2>
-          </ode>
-        </friction>
+    <gazebo reference="back_right_wheel">
+        <surface>
+          <friction>
+            <ode>
+              <mu>10.0</mu>
+              <mu2>10.0</mu2>
+            </ode>
+          </friction>
+        </surface>
     </gazebo>
 
    <!-- ToF Sensor - Forward -->
@@ -271,7 +277,7 @@
 <joint name="tof_sensor_left_joint" type="fixed">
   <parent link="base_link"/>
   <child link="tof_sensor_left_link"/>
-  <origin xyz="0.055 0 0.03" rpy="0 0 0.4636"/> <!-- 0.7854 rad ≈ 45° -->
+  <origin xyz="0.055 0 0.03" rpy="0 0 0.57004"/> <!-- 0.7854 rad ≈ 45° -->
 </joint>
 
 <gazebo reference="tof_sensor_left_link">
@@ -324,7 +330,7 @@
 <joint name="tof_sensor_right_joint" type="fixed">
   <parent link="base_link"/>
   <child link="tof_sensor_right_link"/>
-  <origin xyz="0.055 0 0.03" rpy="0 0 -0.4636"/> <!-- -0.7854 rad ≈ -45° -->
+  <origin xyz="0.055 0 0.03" rpy="0 0 -0.57004"/> <!-- -0.7854 rad ≈ -45° -->
 </joint>
 
 <gazebo reference="tof_sensor_right_link">
@@ -354,6 +360,62 @@
     </plugin>
   </sensor>
 </gazebo>
+
+<!-- imu sensor -->
+<link name="imu_link">
+  <visual>
+    <geometry>
+      <box size="0.02 0.02 0.002"/>
+    </geometry>
+    <material name="red">
+      <color rgba="1 0 0 1"/> 
+    </material>
+  </visual>
+
+  <collision>
+    <geometry>
+      <box size="0.03 0.03 0.01"/>
+    </geometry>
+  </collision>
+
+  <inertial>
+    <mass value="0.01"/>
+    <origin xyz="0 0 0" />
+    <inertia ixx="1e-5" ixy="0.0" ixz="0.0"
+             iyy="1e-5" iyz="0.0"
+             izz="1e-5"/>
+  </inertial>
+</link>
+
+
+<joint name="imu_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="imu_link"/>
+  <origin xyz="0 0 0.017" rpy="0 0 0"/>
+</joint> 
+
+<gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>true</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+
 
 
 
@@ -391,7 +453,7 @@
 
         <!-- limits -->
         <max_wheel_torque>20</max_wheel_torque>
-        <max_wheel_acceleration>1.0</max_wheel_acceleration>
+        <max_wheel_acceleration>50.0</max_wheel_acceleration>
 
         <!-- output -->
         <publish_odom>true</publish_odom>

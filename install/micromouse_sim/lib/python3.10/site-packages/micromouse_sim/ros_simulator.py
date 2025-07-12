@@ -6,6 +6,8 @@ import time
 import math
 from sensor_msgs.msg import LaserScan
 
+from sensor_msgs.msg import Imu   
+from simple_pid import PID                                      
 
 class RosSimulator(Node):
     """
@@ -21,6 +23,12 @@ class RosSimulator(Node):
         self.tof_front_distance = None
         self.tof_left_distance = None
         self.tof_right_distance = None
+        
+        
+        self.imu_orientation = None
+        self.direction=2
+        
+        
         self.tof_front_sub = self.create_subscription(
             LaserScan,
             '/tof_front',
@@ -37,6 +45,12 @@ class RosSimulator(Node):
             LaserScan,
             '/tof_right',
             self.tof_right_callback,
+            10
+        )
+        self.imu_sub = self.create_subscription(
+            Imu,
+            '/imu_plugin/out',
+            self.imu_callback,
             10
         )
 
@@ -135,10 +149,15 @@ class RosSimulator(Node):
         return self.feedback
 
     def turn_left(self, angle=90, angular_speed=0.5):
-        return self.turn(angle_deg=angle, angular_speed=angular_speed)
+        self.direction += 1
+        self.direction %= 4
+        return self.pid_turn(angle_deg=angle, angular_speed=angular_speed)
 
     def turn_right(self, angle=90, angular_speed=0.5):
-        return self.turn(angle_deg=-angle, angular_speed=angular_speed)
+        self.direction -= 1
+        self.direction %= 4
+        return self.pid_turn(angle_deg=-angle, angular_speed=angular_speed)
+
 
     def get_feedback(self):
         return self.feedback
@@ -160,20 +179,144 @@ class RosSimulator(Node):
 
     def get_tof_distance(self):
         return self.tof_front_distance
+    
+    def imu_callback(self, msg):
+        self.imu_orientation = msg.orientation
+
+    ''''
+    def calibrate_by_yaw(self):
+        target_yaw = 0 + math.pi / 2 + 0.0003  # 90 degree right turn
+
+        while abs(self.quaternion_to_yaw(self.feedback.pose.pose.orientation) - target_yaw) > 0.0004 and rclpy.ok():
+            if self.quaternion_to_yaw(self.feedback.pose.pose.orientation) < target_yaw:
+                self.turn_left(0.0001)
+            else:
+                self.turn_right(0.0001)
+        self.wait_for_feedback()
+        print("Calibration by yaw completed")
+        print("Current yaw:", self.quaternion_to_yaw(self.feedback.pose.pose.orientation))
+
+    '''
+    
+    def pid_turn(self, angle_deg=90, angular_speed=0.5):
+        target_angle = math.radians(angle_deg)
+        
+        # Wait for odometry
+        while self.feedback is None and rclpy.ok():
+            rclpy.spin_once(self, timeout_sec=0.1)
+            
+        start_q = self.feedback.pose.pose.orientation
+        # start_yaw = self.quaternion_to_yaw(start_q)
+        target_yaw = (self.direction * (math.pi/2)) - math.pi
+        
+        pid= PID(2.5, 0.0, 0.5, setpoint=target_yaw) #change kp, ki, kd here
+        pid.output_limits = (-0.5, 0.5)             #max and min angular speed
+        
+        while rclpy.ok():
+            rclpy.spin_once(self, timeout_sec=0.05)
+            
+            
+            current_q = self.feedback.pose.pose.orientation
+            current_yaw = self.quaternion_to_yaw(current_q)
+            
+            error = self.shortest_angular_distance(current_yaw, target_yaw)
+            
+            if abs(error) < math.radians(0.5):
+                break
+            
+            omega = pid(current_yaw)
+            
+            move_cmd = Twist()
+            move_cmd.angular.z = omega
+            self.cmd_vel_pub.publish(move_cmd)
+            
+        self.cmd_vel_pub.publish(Twist())
+        print("Current direction:", self.direction, "Current yaw:", self.quaternion_to_yaw(self.quaternion_to_yaw(self.imu_orientation)))
+        return self.feedback
 
 
+        
+    
+        
+        
 def main():
     rclpy.init()
     simulator = RosSimulator()
 
     try:
-        # Example usage:
+        '''
+        while rclpy.ok() and simulator.imu_orientation is None:
+            rclpy.spin_once(simulator, timeout_sec=0.1)
+
+        print("Initial Odometry feedback:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        
+        simulator.turn_left()        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        simulator.turn_left()        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        simulator.turn_left()        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        simulator.turn_left()        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        simulator.turn_left()        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        simulator.turn_left()        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        simulator.turn_left()        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        simulator.turn_left()        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        simulator.turn_left()        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        simulator.turn_left()        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        
+        '''
+        '''
         simulator.move_forward()
-        rel_x = (simulator.feedback.pose.pose.position.x - (-1.5))/0.25
-        print(rel_x)
         simulator.move_forward()
-        rel_x = (simulator.feedback.pose.pose.position.x - (-1.5))/0.25
-        print(rel_x)
+        simulator.move_forward()
+        simulator.move_forward()
+        # simulator.move_forward()
+        
+        simulator.pid_turn(angle_deg=-90)
+        
+        simulator.move_forward()
+        
+        simulator.pid_turn(angle_deg=-90)
+        
+        simulator.move_forward()
+        
+        simulator.pid_turn(angle_deg=90)
+        
+        simulator.move_forward()
+        
+        print("Odometry feedback after turn:" , simulator.quaternion_to_yaw(simulator.feedback.pose.pose.orientation))
+        print("imu orientation:", simulator.quaternion_to_yaw(simulator.imu_orientation))
+        '''
+        pass
+
     except KeyboardInterrupt:
         pass
     finally:

@@ -5,6 +5,8 @@ from nav_msgs.msg import Odometry
 import time
 import math
 from sensor_msgs.msg import LaserScan
+from sensor_msgs.msg import Imu   
+from simple_pid import PID                                      
 
 
 class RosSimulator(Node):
@@ -21,6 +23,12 @@ class RosSimulator(Node):
         self.tof_front_distance = 0
         self.tof_left_distance = 0
         self.tof_right_distance = 0
+        
+        
+        self.imu_orientation = None
+        self.direction=2
+        
+        
         self.tof_front_sub = self.create_subscription(
             LaserScan,
             '/tof_front',
@@ -38,6 +46,14 @@ class RosSimulator(Node):
             '/tof_right',
             self.tof_right_callback,
             20
+        )
+        
+        
+        self.imu_sub = self.create_subscription(
+            Imu,
+            '/imu_plugin/out',
+            self.imu_callback,
+            10
         )
 
     def odom_callback(self, msg):
@@ -141,10 +157,15 @@ class RosSimulator(Node):
         return self.feedback
 
     def turn_left(self, angle=90, angular_speed=0.25):
-        return self.turn(angle_deg=angle, angular_speed=angular_speed)
+        self.direction += 1
+        self.direction %= 4
+        return self.pid_turn(angle_deg=angle, angular_speed=angular_speed,type="left")
+
 
     def turn_right(self, angle=90, angular_speed=0.25):
-        return self.turn(angle_deg=-angle, angular_speed=angular_speed)
+        self.direction -= 1
+        self.direction %= 4
+        return self.pid_turn(angle_deg=-angle, angular_speed=angular_speed,type="right")
 
     def get_feedback(self):
         return self.feedback
@@ -174,6 +195,49 @@ class RosSimulator(Node):
         return self.tof_right_distance
     
     
+    def imu_callback(self, msg):
+        self.imu_orientation = msg.orientation
+    
+    def pid_turn(self, angle_deg=90, angular_speed=0.5,type="left"):
+        
+        # Wait for odometry
+        while self.feedback is None and rclpy.ok():
+            rclpy.spin_once(self, timeout_sec=0.1)
+
+        start_q = self.imu_orientation
+        # start_yaw = self.quaternion_to_yaw(start_q)
+        target_yaw = (self.direction * (math.pi/2)) - math.pi
+        if self.direction == 0 and type == "left":
+            target_yaw = math.pi
+        elif self.direction == 1 and type == "left":
+            self.turn(4)
+        elif self.direction == 3 and type == "right":
+            self.turn(-4)                           #logic correction for specific cases
+        
+        pid= PID(2.5, 0.0, 0.5, setpoint=target_yaw) #change kp, ki, kd here
+        pid.output_limits = (-0.5, 0.5)             #max and min angular speed
+        
+        while rclpy.ok():
+            rclpy.spin_once(self, timeout_sec=0.05)
+            
+            
+            current_q = self.imu_orientation
+            current_yaw = self.quaternion_to_yaw(current_q)
+            
+            error = self.shortest_angular_distance(current_yaw, target_yaw)
+            
+            if abs(error) < math.radians(0.5):
+                break
+            
+            omega = pid(current_yaw)
+            
+            move_cmd = Twist()
+            move_cmd.angular.z = omega
+            self.cmd_vel_pub.publish(move_cmd)
+            
+        self.cmd_vel_pub.publish(Twist())
+        print("Current direction:", self.direction, "Current yaw:", math.degrees(self.quaternion_to_yaw(self.imu_orientation)))
+        return self.feedback
 
 
 

@@ -38,8 +38,10 @@ class Mouse:
         """
         front_close = 0.01 <= tof_front <= 0.23
         front_far = 0.35 <= tof_front <= 0.5
-        left_in_range = 0.24438 <= tof_left <= 0.33425
-        right_in_range = 0.24438 <= tof_right <= 0.33425
+        left_in_range = 0.2316-0.075 <= tof_left <= 0.2316+0.075
+        right_in_range = 0.2316-0.075 <= tof_right <= 0.2316+0.075
+        # left_in_range = 0.24438 <= tof_left <= 0.33425
+        # right_in_range = 0.24438 <= tof_right <= 0.33425
 
         return front_close, front_far, left_in_range, right_in_range
 
@@ -59,7 +61,9 @@ class Mouse:
         front_close, front_far, left_in_range, right_in_range = self.analyze_tof_distances(tof_front, tof_left, tof_right)
         print(front_close, front_far, left_in_range, right_in_range )
         if front_close:
+            
             wall = ((self.x, self.y), (self.x+self.direction[0], self.y+self.direction[1]))
+            self.calibrate_front()
             if wall not in self.known_walls:
                 self.known_walls.append(wall)
             return
@@ -120,7 +124,7 @@ class Mouse:
         rel_y = (position.y - (-2.32))/0.25
         print(rel_x, rel_y)
         self.direction = self.get_left()
-        self.correct_position(rel_x, rel_y)
+        # self.correct_position(rel_x, rel_y)
         return feedback
 
 
@@ -131,7 +135,7 @@ class Mouse:
         rel_y = (position.y - (-2.32))/0.25
         print(rel_x, rel_y)
         self.direction = self.get_right()
-        self.correct_position(rel_x, rel_y)
+        # self.correct_position(rel_x, rel_y)
         return feedback
 
     def turn_around(self):
@@ -154,7 +158,7 @@ class Mouse:
         self.x = round(rel_x)
         self.y = round(rel_y)
         print("Moved to position ({}, {})".format(self.x, self.y))
-        self.correct_position(rel_x, rel_y)
+        # self.correct_position(rel_x, rel_y)
         return True
     
     def correct_position(self, rel_x, rel_y):
@@ -307,8 +311,24 @@ class Mouse:
             if best_path is None or path.feasibility_score > best_path.feasibility_score:
                 best_path = path
         return best_path
+        """_summary_
+        """    
+    def calibrate_front(self):
+        
     
-    
+        target=0.094
+        self.tof_data=self.sim.get_tof_front_distance()
+        print("trying Calibration -- ", self.tof_data)
+
+        # if abs(self.tof_data - target) > err and self.tof_data < 0.25:
+        correction = self.tof_data - target
+        velocity=0.1
+        if correction<0:
+            velocity=0-velocity
+        self.sim.move_forward(abs(correction),velocity)
+        print("Calibrated front distance to 0.125 m with correction:", correction)
+            
+        return
 
 
     

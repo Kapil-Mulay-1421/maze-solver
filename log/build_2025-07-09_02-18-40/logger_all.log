@@ -1,0 +1,236 @@
+[0.908s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.908s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=12, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7f89a3da9a80>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f89a3da9510>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f89a3da9510>>, mixin_verb=('build',))
+[1.778s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[1.778s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[1.778s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[1.778s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[1.778s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[1.778s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[1.778s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/piyush_hardreset/maze-solver'
+[1.778s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[1.779s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[1.779s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[1.779s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[1.779s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[1.780s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[1.780s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[1.780s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[1.780s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[1.811s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[1.811s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[1.811s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[1.812s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[1.812s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[1.812s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extensions ['ignore', 'ignore_ament_install']
+[1.812s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extension 'ignore'
+[1.812s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extension 'ignore_ament_install'
+[1.812s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extensions ['colcon_pkg']
+[1.813s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extension 'colcon_pkg'
+[1.813s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extensions ['colcon_meta']
+[1.813s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extension 'colcon_meta'
+[1.813s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extensions ['ros']
+[1.813s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extension 'ros'
+[1.813s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extensions ['cmake', 'python']
+[1.813s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extension 'cmake'
+[1.813s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extension 'python'
+[1.813s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extensions ['python_setup_py']
+[1.814s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms) by extension 'python_setup_py'
+[1.814s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[1.814s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extension 'ignore'
+[1.814s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extension 'ignore_ament_install'
+[1.814s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extensions ['colcon_pkg']
+[1.814s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extension 'colcon_pkg'
+[1.815s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extensions ['colcon_meta']
+[1.815s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extension 'colcon_meta'
+[1.815s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extensions ['ros']
+[1.815s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extension 'ros'
+[1.815s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extensions ['cmake', 'python']
+[1.815s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extension 'cmake'
+[1.815s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extension 'python'
+[1.815s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extensions ['python_setup_py']
+[1.815s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/__pycache__) by extension 'python_setup_py'
+[1.816s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extensions ['ignore', 'ignore_ament_install']
+[1.816s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extension 'ignore'
+[1.816s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extension 'ignore_ament_install'
+[1.816s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extensions ['colcon_pkg']
+[1.816s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extension 'colcon_pkg'
+[1.816s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extensions ['colcon_meta']
+[1.816s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extension 'colcon_meta'
+[1.817s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extensions ['ros']
+[1.817s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extension 'ros'
+[1.817s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extensions ['cmake', 'python']
+[1.817s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extension 'cmake'
+[1.817s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extension 'python'
+[1.817s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extensions ['python_setup_py']
+[1.817s] Level 1:colcon.colcon_core.package_identification:_identify(algorithms/maze_images) by extension 'python_setup_py'
+[1.819s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[1.819s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[1.819s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[1.819s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extensions ['ignore', 'ignore_ament_install']
+[1.820s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extension 'ignore'
+[1.820s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extension 'ignore_ament_install'
+[1.820s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extensions ['colcon_pkg']
+[1.820s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extension 'colcon_pkg'
+[1.820s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extensions ['colcon_meta']
+[1.820s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extension 'colcon_meta'
+[1.820s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extensions ['ros']
+[1.820s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extension 'ros'
+[1.821s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extensions ['cmake', 'python']
+[1.821s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extension 'cmake'
+[1.821s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extension 'python'
+[1.821s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extensions ['python_setup_py']
+[1.821s] Level 1:colcon.colcon_core.package_identification:_identify(electronics) by extension 'python_setup_py'
+[1.821s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extensions ['ignore', 'ignore_ament_install']
+[1.821s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extension 'ignore'
+[1.821s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extension 'ignore_ament_install'
+[1.822s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extensions ['colcon_pkg']
+[1.822s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extension 'colcon_pkg'
+[1.822s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extensions ['colcon_meta']
+[1.822s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extension 'colcon_meta'
+[1.822s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extensions ['ros']
+[1.822s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extension 'ros'
+[1.822s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extensions ['cmake', 'python']
+[1.822s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extension 'cmake'
+[1.823s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extension 'python'
+[1.823s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extensions ['python_setup_py']
+[1.823s] Level 1:colcon.colcon_core.package_identification:_identify(hardware) by extension 'python_setup_py'
+[1.823s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extensions ['ignore', 'ignore_ament_install']
+[1.823s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extension 'ignore'
+[1.823s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extension 'ignore_ament_install'
+[1.824s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extensions ['colcon_pkg']
+[1.824s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extension 'colcon_pkg'
+[1.824s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extensions ['colcon_meta']
+[1.824s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extension 'colcon_meta'
+[1.824s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extensions ['ros']
+[1.824s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extension 'ros'
+[1.824s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extensions ['cmake', 'python']
+[1.824s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extension 'cmake'
+[1.824s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extension 'python'
+[1.825s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extensions ['python_setup_py']
+[1.825s] Level 1:colcon.colcon_core.package_identification:_identify(hardware/Mechanism) by extension 'python_setup_py'
+[1.825s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[1.825s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[1.825s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[1.825s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[1.825s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[1.826s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[1.826s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extensions ['ignore', 'ignore_ament_install']
+[1.826s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extension 'ignore'
+[1.826s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extension 'ignore_ament_install'
+[1.826s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extensions ['colcon_pkg']
+[1.826s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extension 'colcon_pkg'
+[1.826s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extensions ['colcon_meta']
+[1.827s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extension 'colcon_meta'
+[1.827s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extensions ['ros']
+[1.827s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extension 'ros'
+[1.827s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extensions ['cmake', 'python']
+[1.827s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extension 'cmake'
+[1.827s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extension 'python'
+[1.827s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extensions ['python_setup_py']
+[1.827s] Level 1:colcon.colcon_core.package_identification:_identify(simulation) by extension 'python_setup_py'
+[1.827s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/build) by extensions ['ignore', 'ignore_ament_install']
+[1.828s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/build) by extension 'ignore'
+[1.828s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/build) ignored
+[1.828s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/install) by extensions ['ignore', 'ignore_ament_install']
+[1.828s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/install) by extension 'ignore'
+[1.829s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/install) ignored
+[1.829s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/log) by extensions ['ignore', 'ignore_ament_install']
+[1.830s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/log) by extension 'ignore'
+[1.830s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/log) ignored
+[1.830s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extensions ['ignore', 'ignore_ament_install']
+[1.830s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extension 'ignore'
+[1.830s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extension 'ignore_ament_install'
+[1.831s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extensions ['colcon_pkg']
+[1.831s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extension 'colcon_pkg'
+[1.831s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extensions ['colcon_meta']
+[1.831s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extension 'colcon_meta'
+[1.831s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extensions ['ros']
+[1.831s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extension 'ros'
+[1.831s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extensions ['cmake', 'python']
+[1.831s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extension 'cmake'
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extension 'python'
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extensions ['python_setup_py']
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src) by extension 'python_setup_py'
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src/micromouse_sim) by extensions ['ignore', 'ignore_ament_install']
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src/micromouse_sim) by extension 'ignore'
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src/micromouse_sim) by extension 'ignore_ament_install'
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src/micromouse_sim) by extensions ['colcon_pkg']
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src/micromouse_sim) by extension 'colcon_pkg'
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src/micromouse_sim) by extensions ['colcon_meta']
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src/micromouse_sim) by extension 'colcon_meta'
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src/micromouse_sim) by extensions ['ros']
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(simulation/src/micromouse_sim) by extension 'ros'
+[1.839s] DEBUG:colcon.colcon_core.package_identification:Package 'simulation/src/micromouse_sim' with type 'ros.ament_python' and name 'micromouse_sim'
+[1.839s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[1.839s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[1.839s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[1.839s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[1.839s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[1.912s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[1.912s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[1.919s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 1 installed packages in /home/piyush_hardreset/maze-solver/install
+[1.924s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 285 installed packages in /opt/ros/humble
+[1.928s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[2.015s] Level 5:colcon.colcon_core.verb:set package 'micromouse_sim' build argument 'cmake_args' from command line to 'None'
+[2.015s] Level 5:colcon.colcon_core.verb:set package 'micromouse_sim' build argument 'cmake_target' from command line to 'None'
+[2.015s] Level 5:colcon.colcon_core.verb:set package 'micromouse_sim' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.015s] Level 5:colcon.colcon_core.verb:set package 'micromouse_sim' build argument 'cmake_clean_cache' from command line to 'False'
+[2.015s] Level 5:colcon.colcon_core.verb:set package 'micromouse_sim' build argument 'cmake_clean_first' from command line to 'False'
+[2.015s] Level 5:colcon.colcon_core.verb:set package 'micromouse_sim' build argument 'cmake_force_configure' from command line to 'False'
+[2.015s] Level 5:colcon.colcon_core.verb:set package 'micromouse_sim' build argument 'ament_cmake_args' from command line to 'None'
+[2.015s] Level 5:colcon.colcon_core.verb:set package 'micromouse_sim' build argument 'catkin_cmake_args' from command line to 'None'
+[2.015s] Level 5:colcon.colcon_core.verb:set package 'micromouse_sim' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.015s] DEBUG:colcon.colcon_core.verb:Building package 'micromouse_sim' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/piyush_hardreset/maze-solver/build/micromouse_sim', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/piyush_hardreset/maze-solver/install/micromouse_sim', 'merge_install': False, 'path': '/home/piyush_hardreset/maze-solver/simulation/src/micromouse_sim', 'symlink_install': False, 'test_result_base': None}
+[2.015s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[2.017s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[2.018s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/piyush_hardreset/maze-solver/simulation/src/micromouse_sim' with build type 'ament_python'
+[2.018s] Level 1:colcon.colcon_core.shell:create_environment_hook('micromouse_sim', 'ament_prefix_path')
+[2.032s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[2.032s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/hook/ament_prefix_path.ps1'
+[2.035s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/hook/ament_prefix_path.dsv'
+[2.037s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/hook/ament_prefix_path.sh'
+[2.039s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.039s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.559s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/piyush_hardreset/maze-solver/simulation/src/micromouse_sim'
+[2.560s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.560s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.697s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/piyush_hardreset/maze-solver/simulation/src/micromouse_sim': PYTHONPATH=/home/piyush_hardreset/maze-solver/build/micromouse_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/piyush_hardreset/maze-solver/install/micromouse_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/micromouse_sim build --build-base /home/piyush_hardreset/maze-solver/build/micromouse_sim/build install --record /home/piyush_hardreset/maze-solver/build/micromouse_sim/install.log --single-version-externally-managed install_data
+[4.239s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/piyush_hardreset/maze-solver/simulation/src/micromouse_sim' returned '0': PYTHONPATH=/home/piyush_hardreset/maze-solver/build/micromouse_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/piyush_hardreset/maze-solver/install/micromouse_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/micromouse_sim build --build-base /home/piyush_hardreset/maze-solver/build/micromouse_sim/build install --record /home/piyush_hardreset/maze-solver/build/micromouse_sim/install.log --single-version-externally-managed install_data
+[4.255s] Level 1:colcon.colcon_core.environment:checking '/home/piyush_hardreset/maze-solver/install/micromouse_sim' for CMake module files
+[4.256s] Level 1:colcon.colcon_core.environment:checking '/home/piyush_hardreset/maze-solver/install/micromouse_sim' for CMake config files
+[4.258s] Level 1:colcon.colcon_core.environment:checking '/home/piyush_hardreset/maze-solver/install/micromouse_sim/lib'
+[4.259s] Level 1:colcon.colcon_core.environment:checking '/home/piyush_hardreset/maze-solver/install/micromouse_sim/bin'
+[4.259s] Level 1:colcon.colcon_core.environment:checking '/home/piyush_hardreset/maze-solver/install/micromouse_sim/lib/pkgconfig/micromouse_sim.pc'
+[4.259s] Level 1:colcon.colcon_core.environment:checking '/home/piyush_hardreset/maze-solver/install/micromouse_sim/lib/python3.10/site-packages'
+[4.260s] Level 1:colcon.colcon_core.shell:create_environment_hook('micromouse_sim', 'pythonpath')
+[4.260s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/hook/pythonpath.ps1'
+[4.261s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/hook/pythonpath.dsv'
+[4.262s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/hook/pythonpath.sh'
+[4.263s] Level 1:colcon.colcon_core.environment:checking '/home/piyush_hardreset/maze-solver/install/micromouse_sim/bin'
+[4.263s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(micromouse_sim)
+[4.264s] INFO:colcon.colcon_core.shell:Creating package script '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/package.ps1'
+[4.266s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/package.dsv'
+[4.268s] INFO:colcon.colcon_core.shell:Creating package script '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/package.sh'
+[4.270s] INFO:colcon.colcon_core.shell:Creating package script '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/package.bash'
+[4.273s] INFO:colcon.colcon_core.shell:Creating package script '/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/micromouse_sim/package.zsh'
+[4.276s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/piyush_hardreset/maze-solver/install/micromouse_sim/share/colcon-core/packages/micromouse_sim)
+[4.277s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[4.278s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[4.279s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[4.279s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[4.501s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[4.501s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[4.501s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[4.502s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[4.509s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+[4.509s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[4.510s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/piyush_hardreset/maze-solver/install/local_setup.ps1'
+[4.512s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/piyush_hardreset/maze-solver/install/_local_setup_util_ps1.py'
+[4.516s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/piyush_hardreset/maze-solver/install/setup.ps1'
+[4.519s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/piyush_hardreset/maze-solver/install/local_setup.sh'
+[4.521s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/piyush_hardreset/maze-solver/install/_local_setup_util_sh.py'
+[4.522s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/piyush_hardreset/maze-solver/install/setup.sh'
+[4.524s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/piyush_hardreset/maze-solver/install/local_setup.bash'
+[4.526s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/piyush_hardreset/maze-solver/install/setup.bash'
+[4.528s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/piyush_hardreset/maze-solver/install/local_setup.zsh'
+[4.530s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/piyush_hardreset/maze-solver/install/setup.zsh'
