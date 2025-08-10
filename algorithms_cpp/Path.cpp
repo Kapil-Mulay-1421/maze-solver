@@ -2,7 +2,8 @@
 #include <utility>
 #include <cmath>
 #include <limits>
-#include "Regression.cpp"  // Assumed to return weights as a tuple or struct
+#include "Regression.hpp"  // Assumed to return weights as a tuple or struct
+#include <iostream>
 
 class Path {
 public:
@@ -18,9 +19,24 @@ public:
 
     Path(const std::vector<std::pair<int, int>>& positions_, const std::vector<std::pair<int, int>>& moves_)
         : positions(positions_), moves(moves_) {
+        std::cout << "Creating Path object" << std::endl;
+        std::cout << "Positions: ";
+        for (const auto& pos : positions) {
+            std::cout << "(" << pos.first << ", " << pos.second << ") ";
+        }
+        std::cout << std::endl;
+        std::cout << "Moves: ";
+        for (const auto& move : moves) {
+            std::cout << "(" << move.first << ", " << move.second << ") ";
+        }
+        std::cout << std::endl;
         turns = calculateTurns(moves);
+        std::cout << "Turns: " << turns << std::endl;
         length = moves.size();
+        std::cout << "Length: " << length << std::endl;
         std::tie(optimizedLength, optimizedTurns) = optimizeLengthAndTurns();
+        std::cout << "Optimized Length: " << optimizedLength << std::endl;
+        std::cout << "Optimized Turns: " << optimizedTurns << std::endl;
         feasibilityScore = calculateFeasibilityScore();
     }
 

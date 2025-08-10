@@ -53,7 +53,7 @@ public:
         const std::vector<std::vector<int>>& distances,
         bool reverse = false);
 
-    std::vector<std::pair<int, int>> scanWalls();
+    void scanWalls();
 
     std::tuple<bool, bool, bool, bool> analyzeTofDistances(float front, float left, float right);
 
@@ -87,7 +87,7 @@ private:
     int moves_ = 0;
     Visualizer visualizer_;
     std::set<std::pair<std::pair<int, int>, std::pair<int, int>>> knownWalls_;
-    std::vector<std::vector<int>> maze_;
+    std::vector<std::vector<int>> maze_ = std::vector<std::vector<int>>(16, std::vector<int>(16, 0));
 };
 
 #endif // MOUSE_HPP

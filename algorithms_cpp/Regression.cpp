@@ -1,13 +1,11 @@
-#ifndef REGRESSION_H
-#define REGRESSION_H
-
+#include "Regression.hpp"
 #include <vector>
 #include <tuple>
 #include <numeric>
 #include <cmath>
 
 // Replace this with real experimental data
-static const std::vector<std::pair<std::pair<double, double>, double>> data = {
+const std::vector<std::pair<std::pair<double, double>, double>> data = {
     {{60, 20}, 4.0},
     {{65, 25}, 4.5},
     {{70, 22}, 4.7},
@@ -15,7 +13,7 @@ static const std::vector<std::pair<std::pair<double, double>, double>> data = {
     {{80, 35}, 5.8}
 };
 
-inline std::tuple<double, double, double> regress() {
+std::tuple<double, double, double> regress() {
     size_t n = data.size();
     double sum_x1 = 0, sum_x2 = 0, sum_y = 0;
     double sum_x1x1 = 0, sum_x2x2 = 0, sum_x1x2 = 0;
@@ -55,5 +53,3 @@ inline std::tuple<double, double, double> regress() {
 
     return {w_length, w_turns, intercept};
 }
-
-#endif // REGRESSION_H

@@ -1,7 +1,6 @@
 // main.cpp
 
 #include "Mouse.hpp"
-
 int main(int argc, char** argv) {
 
     // Initialize a 16x16 maze with zeros
@@ -11,11 +10,14 @@ int main(int argc, char** argv) {
     std::pair<int, int> goal = {8, 8};
 
     // Create a Mouse object
-    Mouse mouse(start_point.first, start_point.second, {}, goal, {}, {}, "right_first");
+    Mouse mouse(start_point.first, start_point.second, {}, goal, maze, {}, "right_first");
 
     // First navigation to goal
+    std::cout << "scanning walls" << std::endl;
     mouse.scanWalls();
+    std::cout << "flood filling maze" << std::endl;
     maze = mouse.floodFill();
+    std::cout << "navigating to goal" << std::endl;
     mouse.navigate(maze);
 
 

@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <set>
 #include <memory>
-#include "Lidar.cpp"
+#include "Lidar.hpp"
 
 Mouse::Mouse(int x, int y,
              const std::set<std::pair<std::pair<int, int>, std::pair<int, int>>>& known_walls,
@@ -48,14 +48,12 @@ std::pair<int, int> Mouse::getRight() {
     return {-1, 0}; // direction_ == (0, -1)
 }
 
-void scanWalls() {
-    auto found_walls = scan(x, y, direction_);
+void Mouse::scanWalls() {
+    auto found_walls = scan(x_, y_, direction_);
     for (const auto& wall : found_walls) {
         auto reverse_wall = std::make_pair(wall.second, wall.first);
         if (knownWalls_.find(wall) == knownWalls_.end() &&
             knownWalls_.find(reverse_wall) == knownWalls_.end()) {
-            std::cout << "Found a new wall between (" << wall.first.first << ", " << wall.first.second
-                        << ") and (" << wall.second.first << ", " << wall.second.second << ")\n";
             knownWalls_.insert(wall);
         }
     }
@@ -159,6 +157,10 @@ bool Mouse::moveForward(double distance) {
     return true;
 }
 
+void Mouse::moveForward() {
+    moveForward(1.0); // Move forward by one cell (or suitable default)
+}
+
 // void Mouse::calibrateFront() {
 //     float target = 0.094;
 //     float tof = sim_.getTofFrontDistance();
@@ -172,7 +174,6 @@ std::unordered_map<std::pair<int, int>, int, pair_hash> Mouse::floodFill(
     std::pair<int, int> goal,
     const std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>>& walls,
     const std::set<std::pair<int, int>>& visited) {
-
     std::unordered_map<std::pair<int, int>, int, pair_hash> distances;
     std::queue<std::pair<int, int>> q;
     q.push(goal);
@@ -205,6 +206,29 @@ std::unordered_map<std::pair<int, int>, int, pair_hash> Mouse::floodFill(
     return distances;
 }
 
+std::vector<std::vector<int>> Mouse::floodFill() {
+    // Prepare visited set
+    std::set<std::pair<int, int>> visited;
+    int l = maze_.size();
+    int b = maze_[0].size();
+    for (int i = 0; i < l; ++i)
+        for (int j = 0; j < b; ++j)
+            visited.insert({i, j});
+
+    // Convert knownWalls_ to vector
+    std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> walls(knownWalls_.begin(), knownWalls_.end());
+
+    // Get distances from floodFill
+    auto distances = floodFill(goal_, walls, visited);
+
+    // Build maze grid from distances
+    std::vector<std::vector<int>> maze(l, std::vector<int>(b, std::numeric_limits<int>::max()));
+    for (const auto& [pos, dist] : distances) {
+        maze[pos.first][pos.second] = dist;
+    }
+    return maze;
+}
+
 
 void Mouse::navigate(const std::vector<std::vector<int>>& maze, bool reverse) {
     moves_ = 0;
@@ -219,7 +243,7 @@ void Mouse::navigate(const std::vector<std::vector<int>>& maze, bool reverse) {
     positions.emplace_back(x_, y_);
 
     while (x_ != goal_.first || y_ != goal_.second) {
-        visualizer_.visualizeMaze(maze_);
+        visualizer_.visualizeMaze(maze_, x_, y_, knownWalls_);
         int best_value = std::numeric_limits<int>::max();
         std::pair<int, int> best_move = {0, 0};
 
@@ -238,7 +262,7 @@ void Mouse::navigate(const std::vector<std::vector<int>>& maze, bool reverse) {
                 continue;
 
             if (new_x >= 0 && new_x < l && new_y >= 0 && new_y < b) {
-                int value = maze[new_x][new_y];
+                int value = maze_[new_x][new_y];
                 if (value < best_value) {
                     best_value = value;
                     best_move = {dx, dy};
@@ -254,14 +278,13 @@ void Mouse::navigate(const std::vector<std::vector<int>>& maze, bool reverse) {
             known_walls_at_each_step.push_back(knownWalls_);
         } else {
             changeDirection(best_move);
-            std::cout << "Changed direction to (" << direction_.first << ", " << direction_.second << ")\n";
         }
 
         scanWalls();
         maze_ = floodFill();
     }
 
-    visualizer_.visualizeMaze(maze_);
+    visualizer_.visualizeMaze(maze_, x_, y_, knownWalls_);
 
     if (reverse) {
         std::tie(moves, positions) = reversePath(moves, positions);
@@ -294,9 +317,7 @@ void Mouse::removeLoopsAndMemorize(const std::vector<std::pair<int, int>>& moves
         }
     }
 
-    Path newPathObj;
-    newPathObj.positions = newPath;
-    newPathObj.moves = moves;
+    Path newPathObj(newPath, moves);
     knownPaths_.push_back(newPathObj);
 }
 
