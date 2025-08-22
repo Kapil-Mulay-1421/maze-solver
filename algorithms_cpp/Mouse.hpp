@@ -44,7 +44,7 @@ public:
     void removeLoopsAndMemorize(const std::vector<std::pair<int, int>>& moves,
                                 const std::vector<std::pair<int, int>>& wallHits);
 
-    void removeLoopsAndMemorize(const std::vector<std::pair<int, int> >&, std::vector<std::pair<int, int> >&);
+    void removeLoopsAndMemorize(std::vector<std::pair<int, int> >&, std::vector<std::pair<int, int> >&);
 
     void explore();
     void run();

@@ -148,10 +148,11 @@ bool Mouse::moveForward(double distance) {
 
     // std::cout << relX << ", " << relY << std::endl;
 
+    sim_.moveForward(distance);
     x_ = x_ + direction_.first;
     y_ = y_ + direction_.second;
 
-    std::cout << "Moved to position (" << x_ << ", " << y_ << ")" << std::endl;
+    // std::cout << "Moved to position (" << x_ << ", " << y_ << ")" << std::endl;
 
     // correctPosition(relX, relY);
     return true;
@@ -301,23 +302,23 @@ void Mouse::navigate(const std::vector<std::vector<int>>& maze, bool reverse) {
     }
     std::cout << "\n";
 }
+void Mouse::removeLoopsAndMemorize(std::vector<std::pair<int, int>>& moves, 
+                                std::vector<std::pair<int, int>>& positions) {
 
-void Mouse::removeLoopsAndMemorize(const std::vector<std::pair<int, int>>& moves, 
-                                std::vector<std::pair<int, int>>& path) {
-    std::unordered_map<std::pair<int, int>, int, pair_hash> seen;
-    std::vector<std::pair<int, int>> newPath;
-
-    for (size_t i = 0; i < path.size(); ++i) {
-        auto cell = path[i];
-        if (seen.find(cell) != seen.end()) {
-            newPath.erase(newPath.begin() + seen[cell], newPath.end());
-        } else {
-            seen[cell] = newPath.size();
-            newPath.push_back(cell);
+    for (size_t i = 0; i < moves.size(); ++i) {
+        for (size_t j = moves.size(); j > i; --j) {
+            if (positions[i] == positions[j]) {
+                // erase moves[i:j]
+                moves.erase(moves.begin() + i, moves.begin() + j);
+                // erase positions[i:j]
+                positions.erase(positions.begin() + i, positions.begin() + j);
+                break; // stop after first removal for this i
+            }
         }
     }
 
-    Path newPathObj(newPath, moves);
+    Path newPathObj(positions, moves);
+    std::cout << "New path created with length: " << newPathObj.length << " and turns: " << newPathObj.turns << "\n";
     knownPaths_.push_back(newPathObj);
 }
 
