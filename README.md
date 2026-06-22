@@ -16,6 +16,13 @@ The project is divided into the following major parts:
 
 Please head over to the respective folders to learn more about the same.
 
+## Demo
+
+https://github.com/user-attachments/assets/d6f49a7b-e452-4b97-ae6b-94ff88f7cec8
+
+
+
+
 ## Contributing
 
 Contributions to this project are welcome. If you have any suggestions or improvements, please create a pull request or open an issue.
