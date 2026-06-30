@@ -77,7 +77,7 @@ go through the readme in simulation folder
 Clone the repo:
 
 ```bash
-git clone https://github.com/Mod-Piyush-Goyal/Maze-Solver-TECHNOXIAN-.git
+git clone https://github.com/Kapil-Mulay-1421/maze-solver.git
 ```
 
 To experiment with the algorithm itself before touching hardware, start in `algorithms/` — it's plain Python, so you just need a recent Python 3 install. The `flood-fill-visualization/` folder is the easiest way to actually see what the algorithm is doing on a sample maze.
