@@ -1,0 +1,20 @@
+running egg_info
+writing ../../build/micromouse_sim/micromouse_sim.egg-info/PKG-INFO
+writing dependency_links to ../../build/micromouse_sim/micromouse_sim.egg-info/dependency_links.txt
+writing entry points to ../../build/micromouse_sim/micromouse_sim.egg-info/entry_points.txt
+writing requirements to ../../build/micromouse_sim/micromouse_sim.egg-info/requires.txt
+writing top-level names to ../../build/micromouse_sim/micromouse_sim.egg-info/top_level.txt
+reading manifest file '../../build/micromouse_sim/micromouse_sim.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file '../../build/micromouse_sim/micromouse_sim.egg-info/SOURCES.txt'
+running build
+running build_py
+running install
+running install_lib
+running install_data
+running install_egg_info
+removing '/home/piyush_hardreset/maze-solver/simulation/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/micromouse_sim/micromouse_sim.egg-info to /home/piyush_hardreset/maze-solver/simulation/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim-0.0.0-py3.10.egg-info
+running install_scripts
+Installing ros_simulator script to /home/piyush_hardreset/maze-solver/simulation/install/micromouse_sim/lib/micromouse_sim
+writing list of installed files to '/home/piyush_hardreset/maze-solver/simulation/build/micromouse_sim/install.log'

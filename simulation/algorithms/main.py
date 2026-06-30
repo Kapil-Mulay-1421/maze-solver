@@ -1,0 +1,72 @@
+# Import the Mouse class from mouse.py
+from mouse import Mouse
+import numpy as np
+import rclpy
+
+def main():
+    # Initialize a 5x5 maze with zeros
+    maze = np.zeros((16, 16))
+
+    # Set start_point
+    start_point = (0, 0)
+    
+    # Set the goal position
+    goal = (8, 8)
+    maze[goal] = 0
+
+    rclpy.init()
+    
+    # Create a mouse instance and navigate the maze
+    mouse = Mouse(start_point[0], start_point[1], [], goal, [], [], mode='right_first')
+    mouse.scan_walls()
+    maze = mouse.flood_fill()
+    mouse.navigate(maze)
+
+    print(mouse.x, mouse.y)
+
+    mouse.goal = (start_point[0], start_point[1])
+    mouse.scan_walls()
+    maze = mouse.flood_fill()
+    mouse.navigate(maze, reverse=True)
+
+    print(mouse.x, mouse.y)
+
+    mouse.goal = goal
+    mouse.scan_walls()
+    mouse.flood_fill()
+    mouse.navigate(maze)
+
+    print(mouse.x, mouse.y)
+
+    mouse.goal = (start_point[0], start_point[1])
+    mouse.scan_walls()
+    maze = mouse.flood_fill()
+    mouse.navigate(maze, reverse=True)
+
+
+
+
+    print("All paths found:")
+    for path in mouse.known_paths:
+        print("Path: {}, \nLength: {}, \nTurns: {}, \nFeasibility Score: {}".format(
+            path.positions, 
+            path.optimized_length, 
+            path.optimized_turns, 
+            path.feasibility_score
+        ))
+
+    best_path = mouse.get_best_path()
+    print("The best path is: {}, \nLength: {}, \nTurns: {}, \nFeasibility Score: {}".format(
+        best_path.positions, 
+        best_path.optimized_length, 
+        best_path.optimized_turns, 
+        best_path.feasibility_score
+    ))
+    # plot_paths = mouse.minimum_time_trajectory_optimize()
+    # print('paths', plot_paths)
+    # for path in plot_paths:
+    #     show_optimized_trajectory(path, maze, start_point)
+
+# Run the main function
+if __name__ == "__main__":
+    main()

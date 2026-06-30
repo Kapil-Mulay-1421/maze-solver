@@ -1,0 +1,28 @@
+[0.441s] Invoking command in '/home/mkapil/ros2_ws/maze-solver/simulation/src/micromouse_sim': PYTHONPATH=/home/mkapil/ros2_ws/maze-solver/simulation/build/micromouse_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/micromouse_sim build --build-base /home/mkapil/ros2_ws/maze-solver/simulation/build/micromouse_sim/build install --record /home/mkapil/ros2_ws/maze-solver/simulation/build/micromouse_sim/install.log --single-version-externally-managed install_data
+[0.597s] running egg_info
+[0.597s] writing ../../build/micromouse_sim/micromouse_sim.egg-info/PKG-INFO
+[0.598s] writing dependency_links to ../../build/micromouse_sim/micromouse_sim.egg-info/dependency_links.txt
+[0.598s] writing entry points to ../../build/micromouse_sim/micromouse_sim.egg-info/entry_points.txt
+[0.598s] writing requirements to ../../build/micromouse_sim/micromouse_sim.egg-info/requires.txt
+[0.598s] writing top-level names to ../../build/micromouse_sim/micromouse_sim.egg-info/top_level.txt
+[0.599s] reading manifest file '../../build/micromouse_sim/micromouse_sim.egg-info/SOURCES.txt'
+[0.599s] adding license file 'LICENSE'
+[0.600s] writing manifest file '../../build/micromouse_sim/micromouse_sim.egg-info/SOURCES.txt'
+[0.600s] running build
+[0.600s] running build_py
+[0.600s] running install
+[0.601s] running install_lib
+[0.602s] running install_data
+[0.602s] creating /home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/share/micromouse_sim/urdf
+[0.602s] copying urdf/inertial_macros.xacro -> /home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/share/micromouse_sim/urdf
+[0.615s] copying urdf/robot.urdf.xacro -> /home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/share/micromouse_sim/urdf
+[0.615s] copying urdf/skid.xacro -> /home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/share/micromouse_sim/urdf
+[0.616s] copying urdf/gazebo_control.xacro -> /home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/share/micromouse_sim/urdf
+[0.617s] creating /home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/share/micromouse_sim/meshes
+[0.617s] running install_egg_info
+[0.618s] removing '/home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim-0.0.0-py3.10.egg-info' (and everything under it)
+[0.619s] Copying ../../build/micromouse_sim/micromouse_sim.egg-info to /home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim-0.0.0-py3.10.egg-info
+[0.619s] running install_scripts
+[0.636s] Installing ros_simulator script to /home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/lib/micromouse_sim
+[0.636s] writing list of installed files to '/home/mkapil/ros2_ws/maze-solver/simulation/build/micromouse_sim/install.log'
+[0.656s] Invoked command in '/home/mkapil/ros2_ws/maze-solver/simulation/src/micromouse_sim' returned '0': PYTHONPATH=/home/mkapil/ros2_ws/maze-solver/simulation/build/micromouse_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mkapil/ros2_ws/maze-solver/simulation/install/micromouse_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/micromouse_sim build --build-base /home/mkapil/ros2_ws/maze-solver/simulation/build/micromouse_sim/build install --record /home/mkapil/ros2_ws/maze-solver/simulation/build/micromouse_sim/install.log --single-version-externally-managed install_data

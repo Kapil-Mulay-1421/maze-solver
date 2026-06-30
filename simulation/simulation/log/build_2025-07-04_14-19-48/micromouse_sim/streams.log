@@ -1,0 +1,23 @@
+[1.676s] Invoking command in '/home/piyush_hardreset/maze-solver/simulation/src/micromouse_sim': PYTHONPATH=/home/piyush_hardreset/maze-solver/simulation/build/micromouse_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/piyush_hardreset/maze-solver/simulation/install/micromouse_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/micromouse_sim build --build-base /home/piyush_hardreset/maze-solver/simulation/build/micromouse_sim/build install --record /home/piyush_hardreset/maze-solver/simulation/build/micromouse_sim/install.log --single-version-externally-managed install_data
+[2.194s] running egg_info
+[2.195s] writing ../../build/micromouse_sim/micromouse_sim.egg-info/PKG-INFO
+[2.197s] writing dependency_links to ../../build/micromouse_sim/micromouse_sim.egg-info/dependency_links.txt
+[2.198s] writing entry points to ../../build/micromouse_sim/micromouse_sim.egg-info/entry_points.txt
+[2.198s] writing requirements to ../../build/micromouse_sim/micromouse_sim.egg-info/requires.txt
+[2.199s] writing top-level names to ../../build/micromouse_sim/micromouse_sim.egg-info/top_level.txt
+[2.203s] reading manifest file '../../build/micromouse_sim/micromouse_sim.egg-info/SOURCES.txt'
+[2.204s] adding license file 'LICENSE'
+[2.205s] writing manifest file '../../build/micromouse_sim/micromouse_sim.egg-info/SOURCES.txt'
+[2.206s] running build
+[2.206s] running build_py
+[2.207s] running install
+[2.208s] running install_lib
+[2.211s] running install_data
+[2.212s] copying urdf/skid.xacro -> /home/piyush_hardreset/maze-solver/simulation/install/micromouse_sim/share/micromouse_sim/urdf
+[2.214s] running install_egg_info
+[2.218s] removing '/home/piyush_hardreset/maze-solver/simulation/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim-0.0.0-py3.10.egg-info' (and everything under it)
+[2.221s] Copying ../../build/micromouse_sim/micromouse_sim.egg-info to /home/piyush_hardreset/maze-solver/simulation/install/micromouse_sim/lib/python3.10/site-packages/micromouse_sim-0.0.0-py3.10.egg-info
+[2.226s] running install_scripts
+[2.266s] Installing ros_simulator script to /home/piyush_hardreset/maze-solver/simulation/install/micromouse_sim/lib/micromouse_sim
+[2.267s] writing list of installed files to '/home/piyush_hardreset/maze-solver/simulation/build/micromouse_sim/install.log'
+[2.315s] Invoked command in '/home/piyush_hardreset/maze-solver/simulation/src/micromouse_sim' returned '0': PYTHONPATH=/home/piyush_hardreset/maze-solver/simulation/build/micromouse_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/piyush_hardreset/maze-solver/simulation/install/micromouse_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/micromouse_sim build --build-base /home/piyush_hardreset/maze-solver/simulation/build/micromouse_sim/build install --record /home/piyush_hardreset/maze-solver/simulation/build/micromouse_sim/install.log --single-version-externally-managed install_data
