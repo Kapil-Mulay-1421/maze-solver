@@ -1,4 +1,4 @@
-# Maze Solver Project Documentation
+# Maze Solver Algorithm Documentation
 
 ## Overview
 
