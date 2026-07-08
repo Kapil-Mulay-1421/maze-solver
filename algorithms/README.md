@@ -192,31 +192,35 @@ where $L$ and $T$ are the original move length and turn count, and $L_{opt}$ and
       <img src="images/flood_filled_maze_at_start.png" alt="Flood fill at start" width="420" />
       <img src="images/flood_filled_maze_at_end.png" alt="Flood fill at end" width="420" />
    </p> -->
-   <p align="center">
-      <figure style="display:inline-block;margin:0 16px;text-align:center;">
-         <img src="images/flood_filled_maze_at_start.png" alt="Initial forward run" width="350" />  
-         <figcaption><strong style="font-size: 11px;">Flood-filled maze as seen my the micromouse at the beginning</strong></figcaption>
-      </figure>
-      <figure style="display:inline-block;margin:0 16px;text-align:center;">
-         <img src="images/flood_filled_maze_at_end.png" alt="Forward run after exploration" width="350" />  
-         <figcaption><strong style="font-size: 11px;">Flood-filled maze as seen my the micromouse after exploration</strong></figcaption>
-      </figure>
-   </p>
+   <table>
+   <tr>
+      <td align="center">
+         <img src="images/flood_filled_maze_at_start.png" alt="Initial forward run" width="350" /><br />
+         <sub><strong>Flood-filled maze as seen by the micromouse at the beginning</strong></sub>
+      </td>
+      <td align="center">
+         <img src="images/flood_filled_maze_at_end.png" alt="Forward run after exploration" width="350" /><br />
+         <sub><strong>Flood-filled maze as seen by the micromouse after exploration</strong></sub>
+      </td>
+   </tr>
+   </table>
 
    These two images show the flood-fill values: Greater number signifies greater distance from the goal. G represents the Goal, while M represents the Micromouse.
 
    ### Example Runs
 
-   <p align="center">
-      <figure style="display:inline-block;margin:0 16px;text-align:center;">
-         <img src="images/maze_run_1.gif" alt="Initial forward run" width="350" />  
-         <figcaption><strong>Initial forward run</strong></figcaption>
-      </figure>
-      <figure style="display:inline-block;margin:0 16px;text-align:center;">
-         <img src="images/maze_run_3.gif" alt="Forward run after exploration" width="350" />  
-         <figcaption><strong>Forward run after some exploration</strong></figcaption>
-      </figure>
-   </p>
+   <table>
+   <tr>
+      <td align="center">
+         <img src="images/maze_run_1.gif" alt="Initial forward run" width="350" /><br />
+         <strong>Initial forward run</strong>
+      </td>
+      <td align="center">
+         <img src="images/maze_run_3.gif" alt="Forward run after exploration" width="350" /><br />
+         <strong>Forward run after some exploration</strong>
+      </td>
+   </tr>
+   </table>
 
    - **Note:** Blue walls in the GIFs are walls that have been discovered. The red walls are yet undiscovered. You can see the red walls turn blue as the micromouse discovers them. Notice how the micromouse makes a wrong turn in the initial run, but corrects it after having explored the maze in subsequent runs.
 
