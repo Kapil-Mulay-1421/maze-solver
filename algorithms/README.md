@@ -195,11 +195,11 @@ where $L$ and $T$ are the original move length and turn count, and $L_{opt}$ and
    <table>
    <tr>
       <td align="center">
-         <img src="images/flood_filled_maze_at_start.png" alt="Initial forward run" width="350" /><br />
+         <img src="images/flood_filled_maze_at_start.png" alt="Initial forward run" width="420" /><br />
          <sub><strong>Flood-filled maze as seen by the micromouse at the beginning</strong></sub>
       </td>
       <td align="center">
-         <img src="images/flood_filled_maze_at_end.png" alt="Forward run after exploration" width="350" /><br />
+         <img src="images/flood_filled_maze_at_end.png" alt="Forward run after exploration" width="420" /><br />
          <sub><strong>Flood-filled maze as seen by the micromouse after exploration</strong></sub>
       </td>
    </tr>
@@ -212,11 +212,11 @@ where $L$ and $T$ are the original move length and turn count, and $L_{opt}$ and
    <table>
    <tr>
       <td align="center">
-         <img src="images/maze_run_1.gif" alt="Initial forward run" width="350" /><br />
+         <img src="images/maze_run_1.gif" alt="Initial forward run" width="420" /><br />
          <strong>Initial forward run</strong>
       </td>
       <td align="center">
-         <img src="images/maze_run_3.gif" alt="Forward run after exploration" width="350" /><br />
+         <img src="images/maze_run_3.gif" alt="Forward run after exploration" width="420" /><br />
          <strong>Forward run after some exploration</strong>
       </td>
    </tr>
