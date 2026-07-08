@@ -22,4 +22,17 @@ Contributions to this project are welcome. If you have any suggestions or improv
 
 ## Acknowledgements
 
-We would like to thank all the contributors and supporters of this project. Your contributions and feedback are greatly appreciated.
+Huge thanks to all the contributors:
+| Name | Entry Number |
+|------|--------------|
+| Harshit Kalra (Captain) | 2024EEB1202 |
+| Kapil Rahul Mulay | 2024EPB1266 |
+| Piyush Goyal | 2024MEB1370 |
+| Aryan Shashikant Deshmukh | 2024MMB1404 |
+| Dedeep Vasireddy | 2024MEB1337 |
+| Shlok Vaidya | 2024AIB1016 |
+| Kian Cuthbert Sparrow | 2024EPB1268 |
+| Sai Manideep Belde | 2024EPB1263 |
+| Amey Kemkar | 2024MEB1328 |
+| Ishan Gangwani | 2024MEB1352 |
+ Your contributions and support are greatly appreciated.
