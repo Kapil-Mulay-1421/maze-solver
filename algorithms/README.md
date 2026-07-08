@@ -183,7 +183,7 @@ where $L$ and $T$ are the original move length and turn count, and $L_{opt}$ and
 
 3. **Run the Script**:
    - Open a terminal or command prompt.
-   - Navigate to the directory containing the `main.py` file.
+   - Navigate to the algorithms directory containing the `main.py` file.
    - Run the script using the following command:
 
      ```bash
