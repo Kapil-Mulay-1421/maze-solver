@@ -2,7 +2,7 @@ from lidar import get_walls
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-def visualize_maze(self, maze):
+def visualize_maze(self, maze, goal):
         print("calling visualize maze from visualizer.py")
         walls = get_walls()
         # Create a copy of the maze to visualize
@@ -22,7 +22,7 @@ def visualize_maze(self, maze):
             for j in range(visual_maze.shape[1]):
                 if visual_maze[i, j] == -1:
                     row += " M "
-                elif visual_maze[i, j] == 0:
+                elif (i, j) == goal:
                     row += " G "
                 else:
                     row += "{:2d} ".format(int(visual_maze[i, j])) 

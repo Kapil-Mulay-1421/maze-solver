@@ -114,7 +114,7 @@ class Mouse:
         known_walls_at_each_step = [self.known_walls.copy()] # for visualization purposes. Remove during production.
         positions = [(self.x, self.y)]
         while self.x != self.goal[0] or self.y != self.goal[1]:
-            visualize_maze(self, maze)
+            visualize_maze(self, maze, self.goal)
             best_value = -1
             best_move = (0, 0)
             # Moves to the adjacent square with the least value
@@ -150,7 +150,7 @@ class Mouse:
             self.scan_walls()
             maze = self.flood_fill()
 
-        visualize_maze(self, maze)
+        visualize_maze(self, maze, self.goal)
         visualize_maze_gui(self, maze, positions, known_walls_at_each_step)
         if reverse:
             # print("moves in reverse: ", moves)
