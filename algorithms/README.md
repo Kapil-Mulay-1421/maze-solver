@@ -2,13 +2,24 @@
 
 ## Overview
 
-This project implements a simulated maze-solving robot (mouse) that can navigate a maze using wall detection, pathfinding, and memory of discovered walls. The project is modular and can be extended to real-world robotics applications.
+This folder contains the implementation a simulated maze-solving robot (mouse) that can navigate a maze using wall detection, pathfinding, and memory of discovered walls. The implementation is modular and can be extended to real-world robotics applications.
 
-### Micromouse in Action
-   <figure style="display:inline-block;margin:0 16px;text-align:center;">
-      <img src="images/maze_run_3.gif" alt="Initial forward run" width="420" />
-      <figcaption><strong>Micromouse Navigating the Maze</strong></figcaption>
-   </figure>
+### Example Runs
+
+   <table>
+   <tr>
+      <td align="center">
+         <img src="images/maze_run_1.gif" alt="Initial forward run" width="420" /><br />
+         <strong>Initial forward run</strong>
+      </td>
+      <td align="center">
+         <img src="images/maze_run_3.gif" alt="Forward run after exploration" width="420" /><br />
+         <strong>Forward run after some exploration</strong>
+      </td>
+   </tr>
+   </table>
+
+   - **Note:** Blue walls in the GIFs are walls that have been discovered. The red walls are yet undiscovered. You can see the red walls turn blue as the micromouse discovers them. Notice how the micromouse makes a wrong turn in the initial run, but corrects it after having explored the maze in subsequent runs.
 
 <br>
 <br>
@@ -206,22 +217,5 @@ where $L$ and $T$ are the original move length and turn count, and $L_{opt}$ and
    </table>
 
    These two images show the flood-fill values: Greater number signifies greater distance from the goal. G represents the Goal, while M represents the Micromouse.
-
-   ### Example Runs
-
-   <table>
-   <tr>
-      <td align="center">
-         <img src="images/maze_run_1.gif" alt="Initial forward run" width="420" /><br />
-         <strong>Initial forward run</strong>
-      </td>
-      <td align="center">
-         <img src="images/maze_run_3.gif" alt="Forward run after exploration" width="420" /><br />
-         <strong>Forward run after some exploration</strong>
-      </td>
-   </tr>
-   </table>
-
-   - **Note:** Blue walls in the GIFs are walls that have been discovered. The red walls are yet undiscovered. You can see the red walls turn blue as the micromouse discovers them. Notice how the micromouse makes a wrong turn in the initial run, but corrects it after having explored the maze in subsequent runs.
 
 Feel free to modify the `walls` array in the [lidar.py] file and the start/goal points in the [main.py] file to create your own custom mazes and test the mouse's navigation capabilities.
