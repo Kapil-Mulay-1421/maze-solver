@@ -36,4 +36,4 @@ Huge thanks to all the contributors:
 | Amey Kemkar | 2024MEB1328 |
 | Ishan Gangwani | 2024MEB1352 |
 
- Made with ❤️, TechnoXian 9.0 Team IIT Ropar
+ Made with ❤️, TechnoXian 9.0 Team IIT Ropar.
