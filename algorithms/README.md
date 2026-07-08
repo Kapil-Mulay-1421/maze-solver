@@ -195,12 +195,10 @@ where $L$ and $T$ are the original move length and turn count, and $L_{opt}$ and
    <p align="center">
       <figure style="display:inline-block;margin:0 16px;text-align:center;">
          <img src="images/flood_filled_maze_at_start.png" alt="Initial forward run" width="350" />  
-         <br>
          <figcaption><strong style="font-size: 11px;">Flood-filled maze as seen my the micromouse at the beginning</strong></figcaption>
       </figure>
       <figure style="display:inline-block;margin:0 16px;text-align:center;">
          <img src="images/flood_filled_maze_at_end.png" alt="Forward run after exploration" width="350" />  
-         <br>
          <figcaption><strong style="font-size: 11px;">Flood-filled maze as seen my the micromouse after exploration</strong></figcaption>
       </figure>
    </p>
@@ -212,12 +210,10 @@ where $L$ and $T$ are the original move length and turn count, and $L_{opt}$ and
    <p align="center">
       <figure style="display:inline-block;margin:0 16px;text-align:center;">
          <img src="images/maze_run_1.gif" alt="Initial forward run" width="350" />  
-         <br>
          <figcaption><strong>Initial forward run</strong></figcaption>
       </figure>
       <figure style="display:inline-block;margin:0 16px;text-align:center;">
          <img src="images/maze_run_3.gif" alt="Forward run after exploration" width="350" />  
-         <br>
          <figcaption><strong>Forward run after some exploration</strong></figcaption>
       </figure>
    </p>
