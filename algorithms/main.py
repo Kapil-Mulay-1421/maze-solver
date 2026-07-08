@@ -37,6 +37,18 @@ def main():
     maze = mouse.flood_fill()
     mouse.navigate(maze, reverse=True)
 
+    mouse.goal = goal
+    mouse.flood_fill()
+    mouse.navigate(maze)
+
+    print(mouse.x, mouse.y)
+
+    mouse.goal = (start_point[0], start_point[1])
+    maze = mouse.flood_fill()
+    mouse.navigate(maze, reverse=True)
+
+
+
 
 
 
